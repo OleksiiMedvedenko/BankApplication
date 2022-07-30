@@ -16,7 +16,7 @@
 
   <ItemGroup>
     <Folder Include="Events\" />
-    <Folder Include="Models\AccountOperationModels\" />
+    <Folder Include="Repository\" />
     <Folder Include="Services\Interface\" />
   </ItemGroup>
 
