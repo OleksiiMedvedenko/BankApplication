@@ -1,4 +1,5 @@
 ﻿using BankApplication.ViewModels.Interface;
+using Prism.Mvvm;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace BankApplication.ViewModels
 {
-    public class MainStartWindow : IMainStartWindow
+    public class HomeViewModel : BindableBase, IHomeViewModel
     {
-        public MainStartWindow()
+        public HomeViewModel()
         {
 
         }

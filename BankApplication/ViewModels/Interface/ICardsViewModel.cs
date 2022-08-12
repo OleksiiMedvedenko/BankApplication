@@ -6,8 +6,7 @@ using System.Threading.Tasks;
 
 namespace BankApplication.ViewModels.Interface
 {
-    public interface IMainStartWindow
+    public interface ICardsViewModel
     {
-
     }
 }

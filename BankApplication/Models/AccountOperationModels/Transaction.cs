@@ -11,10 +11,11 @@ namespace BankApplication.Models.AccountOperationModels
 {
     public class Transaction : IOperation
     {
-        public Account FromAccount { get; private set; }
+        public int TransactionID { get; private set; }
+        public virtual Account FromAccount { get; private set; }
         public Account ToAccount { get; private set; }
         public decimal TransactionAmount { get; private set; }
-        public Guid TransactionID { get; private set; }
+        public string OperationCode { get; private set; }
         public DateTime TransactionOperationDate { get; private set; }
 
         /// <summary>
@@ -29,7 +30,7 @@ namespace BankApplication.Models.AccountOperationModels
             FromAccount = fromAccount;
             ToAccount = toAccount;
             TransactionAmount = transactionAmount;
-            TransactionID = new Guid();
+            OperationCode = Guid.NewGuid().ToString().Substring(0, 12);
             TransactionOperationDate = DateTime.Now;
         }
 
@@ -37,6 +38,11 @@ namespace BankApplication.Models.AccountOperationModels
         {
             FromAccount.Client.Cards.SingleOrDefault(x=> x.CardNumber == $"{fromCardNumber}").AmountOfMoney -= TransactionAmount;
             ToAccount.Client.Cards.SingleOrDefault(x => x.CardNumber == $"{toCardNumber}").AmountOfMoney += TransactionAmount;
+        }
+
+        public override string ToString()
+        {
+            return "Transaction";
         }
     }
 }

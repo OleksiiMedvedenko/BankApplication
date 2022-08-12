@@ -20,13 +20,17 @@ namespace BankApplication
     {
         protected override Window CreateShell()
         {
-            var w = Container.Resolve<MainStartView>();
+            var w = Container.Resolve<Views.MainStartView>();
             return w;
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
-            containerRegistry.Register<IMainStartWindow, MainStartWindow>();
+            // Views
+            containerRegistry.Register<ICardsViewModel, CardsViewModel>();
+            containerRegistry.Register<IHomeViewModel, HomeViewModel>();
+            containerRegistry.Register<IActionHistoryViewModel, ActionHistoryViewModel>();
+            containerRegistry.Register<IBliKOperationViewModel, BliKOperationViewModel>();
         }
     }
 }

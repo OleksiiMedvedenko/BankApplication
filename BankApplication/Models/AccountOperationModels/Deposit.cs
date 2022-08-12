@@ -10,23 +10,50 @@ namespace BankApplication.Models.AccountOperationModels
 {
     public class Deposit : IOperation
     {
-        public Account DepositAccount { get; set; }
+        public int DepositID { get; private set; }
+        public virtual Account DepositAccount { get; set; }
         private decimal AmountUnderRate { get; set; }
-        private DateTime TimePeriod { get; set; } // время на которое клиет кладёт сумму на дипозит 
-        public DateTime DepositOperationDate { get; private set; }
-        public Guid DepositID { get; private set; }
+        private TimeSpan TimePeriod { get; set; } // время на которое клиет кладёт сумму на дипозит 
+        public DateTime DepositOperationStartDate { get; private set; }
+        public DateTime DepositOperationEndDate { get; private set; }
+        public string OperationCode { get; private set; }
         public decimal InterestRate { get; set; }
         public string CardNumber { get; private set; }
 
-        public Deposit(Account account, decimal amount, DateTime timePeriod, string cardNumber)
+        /// <summary>
+        /// For Create Deposit
+        /// </summary>
+        /// <param name="account"></param>
+        /// <param name="amount"></param>
+        /// <param name="timePeriod"></param>
+        /// <param name="cardNumber"></param>
+        public Deposit(Account account, decimal amount, string cardNumber, DateTime depositOperationEndDate)
         {
             DepositAccount = account;
             AmountUnderRate = amount;
-            TimePeriod = timePeriod;
             CardNumber = cardNumber;
-            DepositOperationDate = DateTime.Now;
+            DepositOperationStartDate = DateTime.Now;
+            DepositOperationEndDate = DepositOperationEndDate;
+            OperationCode = Guid.NewGuid().ToString().Substring(0, 12);
+
+            TimePeriod = DepositOperationEndDate.Subtract(DepositOperationStartDate);
         }
 
+        /// <summary>
+        /// For Get Deposit Drom database
+        /// </summary>
+        public Deposit(Account account, decimal amount, string cardNumber, DateTime startDepositDate, DateTime endDepositDate, string operationCode)
+        {
+            DepositAccount = account;
+            AmountUnderRate = amount;
+            CardNumber = cardNumber;
+            DepositOperationStartDate = startDepositDate;
+            DepositOperationEndDate = endDepositDate;
+            OperationCode = operationCode;
+        }
+
+
+        //***Services***\\ or Create Controllers 
         public decimal PutAmountInterest()
         {
             int divisionPercentage = 0;
@@ -45,7 +72,7 @@ namespace BankApplication.Models.AccountOperationModels
 
         private TimeSpan ConvertTimeSpan()
         {
-            TimeSpan timeSpan = new TimeSpan(TimePeriod.Day, TimePeriod.Hour, TimePeriod.Minute, TimePeriod.Second);
+            TimeSpan timeSpan = new TimeSpan(TimePeriod.Days, TimePeriod.Hours, TimePeriod.Minutes, TimePeriod.Seconds);
             return timeSpan;
         }
 
@@ -95,6 +122,11 @@ namespace BankApplication.Models.AccountOperationModels
                 InterestRate = 0.17M;
 
             return InterestRate;
+        }
+
+        public override string ToString()
+        {
+            return "Deposit";
         }
     }
 }

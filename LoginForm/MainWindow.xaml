@@ -115,7 +115,7 @@
                            Stretch="Uniform"
                            Width="85"
                            Height="85"
-                           RenderOptions.BitmapScalingMode="HighQuality"
+                           RenderOptions.BitmapScalingMode="Fant"
                            Margin="0 50 0 0">
                         <Image.RenderTransform>
                             <RotateTransform CenterX="50" CenterY="50" />

@@ -1,0 +1,3 @@
+Check operationCode Wen SaveIM INTO DB, UNIQUE !!!!!!!!
+
+Create unique cardNumber automaticly and SecurityCode 

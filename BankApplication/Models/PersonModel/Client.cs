@@ -14,8 +14,10 @@ namespace BankApplication.Models.PersonModel
         public string PassportNumber { get; private set; }
         public DateTime RegistrationDate { get; private set; }
         public Guid ClientUniqueNumber { get; private set; }
+        public byte?[] UserImage { get; private set; }
+        public byte[] PassportImage { get; private set; }
 
-        public ObservableCollection<Card> Cards { get; private set; }
+        public virtual ObservableCollection<Card> Cards { get; private set; }
 
         /// <summary>
         /// For Get client From DB
@@ -30,7 +32,7 @@ namespace BankApplication.Models.PersonModel
         /// <param name="clientUniqueNumber"></param>
         /// <param name="cards"></param>
         public Client(int clientID, string firstName, string lastName, string email, string phoneNumber, 
-            string passportNumber, DateTime registrationDate, Guid clientUniqueNumber, ObservableCollection<Card> cards)
+            string passportNumber, DateTime registrationDate, Guid clientUniqueNumber, ObservableCollection<Card> cards, byte[] passportImage, byte?[] userImage = null)
         {
             Cards = new ObservableCollection<Card>();
 
@@ -43,6 +45,8 @@ namespace BankApplication.Models.PersonModel
             RegistrationDate = registrationDate;
             ClientUniqueNumber = clientUniqueNumber;
             Cards = cards;
+            PassportImage = passportImage;
+            UserImage = userImage;
         }
 
         /// <summary>
@@ -54,7 +58,7 @@ namespace BankApplication.Models.PersonModel
         /// <param name="email"></param>
         /// <param name="phoneNumber"></param>
         /// <param name="passportNumber"></param>
-        public Client(int clientID, string firstName, string lastName, string email, string phoneNumber, string passportNumber)
+        public Client(int clientID, string firstName, string lastName, string email, string phoneNumber, string passportNumber, byte[] passportImage, byte?[] userImage = null)
         {
             Cards = new ObservableCollection<Card>();
 
@@ -64,6 +68,9 @@ namespace BankApplication.Models.PersonModel
             Email = email;
             PhoneNumber = phoneNumber;
             PassportNumber = passportNumber;
+            PassportImage = passportImage;
+            UserImage = userImage;
+
             RegistrationDate = DateTime.Now;
             ClientUniqueNumber = new Guid();
         }

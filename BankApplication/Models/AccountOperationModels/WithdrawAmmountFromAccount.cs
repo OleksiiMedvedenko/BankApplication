@@ -10,22 +10,33 @@ namespace BankApplication.Models.AccountOperationModels
 {
     public class WithdrawAmmountFromAccount : IOperation
     {
-        public Account Account { get; private set; }
+        public int WithdrawAmmountFromAccountID { get; private set; }
+        public virtual Account Account { get; private set; }
         public decimal Amount { get; private set; }
-        public Guid OperationID { get; private set; }
+        public string OperationCode { get; private set; }
         public DateTime WithdrawOperationDate { get; private set; }
 
+        /// <summary>
+        /// For Create operation
+        /// </summary>
+        /// <param name="account"></param>
+        /// <param name="amount"></param>
         public WithdrawAmmountFromAccount(Account account, decimal amount)
         {
             Account = account;
             Amount = amount;
-            OperationID = new Guid();
+            OperationCode = Guid.NewGuid().ToString().Substring(0, 12);
             WithdrawOperationDate = DateTime.Now;
         }
 
         public void WithdrawAmountExecution(string cardNumber)
         {
             Account.Client.Cards.SingleOrDefault(x => x.CardNumber == $"{cardNumber}").AmountOfMoney -= Amount;
+        }
+
+        public override string ToString()
+        {
+            return "Withdrawing";
         }
     }
 }

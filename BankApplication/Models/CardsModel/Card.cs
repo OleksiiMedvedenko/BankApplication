@@ -6,11 +6,15 @@ namespace BankApplication.Models.CardsModel
     public class Card
     {
         public int CardID { get; private set; }
-        public string CardNumber { get; set; }
+        public virtual Client Client { get; private set; }
+
+        public int SecurityCode { get; private set; }
+        public string CardNumber { get; private set; }
+        public int CardPINCode { get; private set; }
         public decimal AmountOfMoney { get; set; }
-        public Client Client { get; private set; }
         public CurrencyType CardCurrencyType { get; private set; }
         public DateTime CreateCardDate { get; private set; }
+        public bool IsActive { get; private set; } // card can be blocked
 
 
         /// <summary>
@@ -22,14 +26,17 @@ namespace BankApplication.Models.CardsModel
         /// <param name="client"></param>
         /// <param name="cardCurrencyType"></param>
         /// <param name="createCardDate"></param>
-        public Card(int cardID, string cardNumber, decimal amountOfMoney, Client client, CurrencyType cardCurrencyType, DateTime createCardDate)
+        public Card(int cardID, int securityCode, string cardNumber, int cardPINCode, decimal amountOfMoney, Client client, CurrencyType cardCurrencyType, DateTime createCardDate, bool isActive)
         {
             CardID = cardID;
+            SecurityCode = securityCode;
             CardNumber = cardNumber;
+            CardPINCode = cardPINCode;
             AmountOfMoney = amountOfMoney;
             Client = client;
             CardCurrencyType = cardCurrencyType;
             CreateCardDate = createCardDate;
+            IsActive = isActive;
         }
 
 
@@ -42,14 +49,17 @@ namespace BankApplication.Models.CardsModel
         /// <param name="client"></param>
         /// <param name="cardCurrencyType"></param>
         /// <param name="createCardDate"></param>
-        public Card(int cardID, string cardNumber, decimal amountOfMoney, Client client, CurrencyType cardCurrencyType)
+        public Card(int cardID, int securityCode, string cardNumber, int cardPINCode, decimal amountOfMoney, Client client, CurrencyType cardCurrencyType)
         {
             CardID = cardID;
+            SecurityCode = securityCode;
             CardNumber = cardNumber;
+            CardPINCode = cardPINCode;
             AmountOfMoney = amountOfMoney;
             Client = client;
             CardCurrencyType = cardCurrencyType;
             CreateCardDate = DateTime.Now;
+            IsActive = true;
         }
     }
 }
