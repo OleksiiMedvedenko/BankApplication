@@ -1,0 +1,149 @@
+--Create DATABASE [BankApplication.database]
+
+--use [BankApplication.database]
+
+CREATE TABLE Clients 
+(
+	ClientID int NOT NULL PRIMARY KEY  IDENTITY(1,1),
+	FirstName NVARCHAR(255) NOT NULL,
+	LastName NVARCHAR(255) NOT NULL,
+	Email VARCHAR(255) NOT NULL CHECK(Email !='') UNIQUE,
+    PhoneNumber VARCHAR(255) CHECK(PhoneNumber !='') UNIQUE,
+	PassportNumber NVARCHAR(255) NOT NULL UNIQUE,
+	RegistrationDate DATETIME NOT NULL,
+	UniqueNumber VARCHAR(40) UNIQUE NOT NULL,
+	UserImage VarBinary(MAX),
+	PassportImage VARBINARY(MAX) NOT NULL,
+	IsActive BIT DEFAULT 1
+)
+
+INSERT INTO Clients (FirstName, LastName, Email, PhoneNumber, PassportNumber, RegistrationDate, UniqueNumber, UserImage,
+					PassportImage, IsActive)
+	   Values
+	   ('Adam', 'Miler', 'MA@gmail.com', '0412532722', 'FG445115', '2008-11-11 15:28:44', '42764-greeg-6535-b3g1' ,53423, 232312,1),
+	   ('John', 'Smith', 'SJ@gmail.com', '0334345787', 'FG323262', '2008-11-11 11:28:44', '51632-twtyf-htw2-2351' ,12567, 754234,1)
+
+CREATE TABLE CurrencyTypeCard
+(
+	ID int NOT NULL PRIMARY KEY IDENTITY(1,1),
+	Currency NVARCHAR(20) NOT NULL UNIQUE
+)
+
+INSERT INTO CurrencyTypeCard (Currency)
+Values 
+('UAH'),
+('EUR'),
+('USD'),
+('PLN')
+
+CREATE TABLE Cards
+(
+	CardID int NOT NULL PRIMARY KEY  IDENTITY(1,1),
+	ClientID INT NOT NULL FOREIGN KEY (ClientID) REFERENCES Clients(ClientID),
+	CVC2Code INT NOT NULL,
+	CardNumber VARCHAR UNIQUE NOT NULL,
+	PINCode int NOT NULL,
+	CardCurrency INT NOT NULL FOREIGN KEY (CardCurrency) REFERENCES CurrencyTypeCard(ID),
+	IsActive BIT DEFAULT 1,
+	DateOfCardCreate DATETIME NOT NULL,
+)
+
+
+CREATE TABLE Accounts
+(
+	AccountID INT NOT NULL PRIMARY KEY  IDENTITY(1,1),
+	ClientID INT NOT NULL FOREIGN KEY (ClientID) REFERENCES Clients(ClientID),
+	Login NVARCHAR(255) NOT NULL UNIQUE,
+	Password NVARCHAR(255) NOT NULL,
+	RegistrationDate DATETIME NOT NULL,
+	AccountCode VARCHAR(40) UNIQUE NOT NULL,
+	IsActive BIT DEFAULT 1
+)
+
+CREATE TABLE OperationTypes 
+(
+    OperationTypeID int NOT NULL PRIMARY KEY IDENTITY(1,1),
+    OperationName Nvarchar(255) NOT NULL UNIQUE,
+);
+
+INSERT INTO OperationTypes (OperationName)
+VALUES 
+('AddingAmountToAccount'),
+('Deposits'),
+('Transactions'),
+('WithdrawAmmountFromAccount')
+
+CREATE TABLE OperationResultStatus
+(
+	OperationStatuseID int NOT NULL PRIMARY KEY,
+	Status Nvarchar(50) NOT NULL UNIQUE,
+)
+
+INSERT INTO OperationResultStatus (OperationStatuseID ,Status)
+VALUES 
+(5 ,'Income'),
+(7 ,'Lesion')
+
+CREATE TABLE AddingAmountToAccountOperation
+(
+	AddingAmountToAccountID INT NOT NULL PRIMARY KEY  IDENTITY(1,1),
+	OperationType INT NOT NULL FOREIGN KEY (OperationType) REFERENCES OperationTypes(OperationTypeID),
+	AccountID INT NOT NULL FOREIGN KEY (AccountID) REFERENCES Accounts(AccountID),
+	Amount DECIMAL(5,2) NOT NULL CHECK(Amount > 0),
+	OperationCode VARCHAR(40) UNIQUE NOT NULL,
+	DateOfOperation DateTime NOT NULL,
+	OperationResultStatus INT NOT NULL 
+					      FOREIGN KEY (OperationResultStatus) REFERENCES OperationResultStatus(OperationStatuseID),
+	CardNumber VARCHAR NOT NULL,
+)
+
+CREATE TABLE WithdrawAmmountFromAccountOperation
+(
+	WithdrawAmmountFromAccountID INT NOT NULL PRIMARY KEY  IDENTITY(1,1),
+	OperationType INT NOT NULL FOREIGN KEY (OperationType) REFERENCES OperationTypes(OperationTypeID),
+	AccountID INT NOT NULL FOREIGN KEY (AccountID) REFERENCES Accounts(AccountID),
+	Amount DECIMAL(5,2) NOT NULL CHECK(Amount > 0),
+	OperationCode VARCHAR(40) UNIQUE NOT NULL,
+	DateOfOperation DateTime NOT NULL,
+	OperationResultStatus INT NOT NULL 
+					      FOREIGN KEY (OperationResultStatus) REFERENCES OperationResultStatus(OperationStatuseID),
+	CardNumber VARCHAR NOT NULL,
+)
+
+CREATE TABLE DepositOperation
+(
+	DepositID INT NOT NULL PRIMARY KEY  IDENTITY(1,1),
+	OperationType INT NOT NULL FOREIGN KEY (OperationType) REFERENCES OperationTypes(OperationTypeID),
+	AccountID INT NOT NULL FOREIGN KEY (AccountID) REFERENCES Accounts(AccountID),
+	Amount DECIMAL(5,2) NOT NULL CHECK(Amount > 0),
+	DepositStartDate DATETIME NOT NULL,
+	DepositEndDate DATETIME NOT NULL,
+	OperationCode VARCHAR(40) UNIQUE NOT NULL,
+	OperationResultStatus INT NOT NULL 
+					      FOREIGN KEY (OperationResultStatus) REFERENCES OperationResultStatus(OperationStatuseID),
+	CardNumber VARCHAR NOT NULL,
+)
+
+CREATE TABLE TransactionOperation
+(
+	TransactionID INT NOT NULL PRIMARY KEY  IDENTITY(1,1),
+	OperationType INT NOT NULL FOREIGN KEY (OperationType) REFERENCES OperationTypes(OperationTypeID),
+	FromAccountID INT NOT NULL FOREIGN KEY (FromAccountID) REFERENCES Accounts(AccountID),
+	ToAccountID INT NOT NULL FOREIGN KEY (ToAccountID) REFERENCES Accounts(AccountID),
+	Amount DECIMAL(5,2) NOT NULL CHECK(Amount > 0),
+	TransactionOperationDate DATETIME NOT NULL,
+	OperationCode VARCHAR(40) UNIQUE NOT NULL,
+	OperationResultStatus INT NOT NULL 
+					      FOREIGN KEY (OperationResultStatus) REFERENCES OperationResultStatus(OperationStatuseID),
+	CardNumber VARCHAR NOT NULL,
+)
+
+CREATE TABLE ActionRecordsHistory
+(
+	ActionID INT NOT NULL PRIMARY KEY  IDENTITY(1,1),
+	OperationID INT NOT NULL,
+	AccountID INT NOT NULL FOREIGN KEY (AccountID) REFERENCES Accounts(AccountID),
+	Title NVARCHAR(255) CHECK(Title !=''),
+	Description NVARCHAR(255),
+	ActionDate DATETIME NOT NULL,
+)

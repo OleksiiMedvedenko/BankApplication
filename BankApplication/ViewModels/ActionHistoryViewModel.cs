@@ -1,6 +1,5 @@
 ﻿using BankApplication.Models.AccountOperationModels;
 using BankApplication.Models.AccountOperationModels.Interface;
-using BankApplication.Models.AccountOperationModels.OperationResultInAmount;
 using BankApplication.Models.ActionRecordsHistoryModel;
 using BankApplication.Models.PersonModel;
 using BankApplication.ViewModels.Interface;
@@ -20,16 +19,16 @@ namespace BankApplication.ViewModels
     {
         public ActionHistoryViewModel()
         {
-            var client = new Client(1, "test", "test", "test@gmail.com", "123456", "FZ123");
-            var account = new Models.AccountModel.Account(1, "test", "test", 0.1f, client);
-            var operation = new AddingAmountToAccount(account, 200);
-            var operation2 = new WithdrawAmmountFromAccount(account, 100);
+            //var client = new Client(1, "test", "test", "test@gmail.com", "123456", "FZ123", new byte[3]);
+            //var account = new Models.AccountModel.Account(1, "test", "test", client);
+            //var operation = new AddingAmountToAccount(account, 200);
+            //var operation2 = new WithdrawAmmountFromAccount(account, 100);
 
-            ListOfCardOperationHistory = new ObservableCollectionPropertyNotify<ActionHistory<IOperation>>
-            {
-                new ActionHistory<IOperation>(operation, "Test description", account, operation.Amount, OperationResult.Income),
-                new ActionHistory<IOperation>(operation2, "Test description2", account, operation2.Amount, OperationResult.Lesion),
-            };
+            //ListOfCardOperationHistory = new ObservableCollectionPropertyNotify<ActionHistory>
+            //{
+            //    new ActionHistory(operation, "Test description", account, operation.Amount, OperationResult.Income, operation.OperationCode),
+            //    new ActionHistory(operation2, "Test description2", account, operation2.Amount, OperationResult.Lesion, operation.OperationCode),
+            //};
         }
 
         private ObservableCollectionPropertyNotify<ActionHistory<IOperation>> _istOfCardOperationHistory;

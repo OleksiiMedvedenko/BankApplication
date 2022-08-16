@@ -11,11 +11,16 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BankApplication", "BankAppl
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tools", "Tools\Tools\Tools.csproj", "{4FC67C0B-412E-4E15-A1FF-E511BA905F5F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestApp", "TestApp\TestApp.csproj", "{E6B3E7D3-DC10-4AED-840E-55A8E019366D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestApp", "TestApp\TestApp.csproj", "{E6B3E7D3-DC10-4AED-840E-55A8E019366D}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TODO", "TODO", "{CABD7D22-1819-4228-882F-374363BE6ACA}"
 	ProjectSection(SolutionItems) = preProject
 		TODO.txt = TODO.txt
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SQL", "SQL", "{C962488E-D413-426E-BD62-EDD69B12B4C4}"
+	ProjectSection(SolutionItems) = preProject
+		SqlExpressions.txt = SqlExpressions.txt
 	EndProjectSection
 EndProject
 Global

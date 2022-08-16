@@ -24,7 +24,7 @@ namespace BankApplication.Models.AccountModel
         /// <param name="client"></param>
         /// <param name="registrationDate"></param>
         /// <param name="accountCode"></param>
-        public Account(int accountID, string login, string password, float interestRate, Client client, DateTime registrationDate, Guid accountCode, bool isActive)
+        public Account(int accountID, string login, string password, Client client, DateTime registrationDate, Guid accountCode, bool isActive)
         {
             AccountID = accountID;
             Login = login;
@@ -43,7 +43,7 @@ namespace BankApplication.Models.AccountModel
         /// <param name="password"></param>
         /// <param name="interestRate"></param>
         /// <param name="client"></param>
-        public Account(int accountID, string login, string password, float interestRate, Client client)
+        public Account(int accountID, string login, string password, Client client)
         {
             AccountID = accountID;
             Login = login;

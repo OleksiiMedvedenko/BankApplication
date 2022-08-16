@@ -1,5 +1,7 @@
 ﻿using BankApplication.Models.AccountModel;
 using BankApplication.Models.AccountOperationModels.Interface;
+using BankApplication.Models.AccountOperationModels.OperationResultStatus;
+using BankApplication.Models.AccountOperationModels.OperationTypes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +13,7 @@ namespace BankApplication.Models.AccountOperationModels
     public class Deposit : IOperation
     {
         public int DepositID { get; private set; }
+        public OperationType OperationType { get; set; }
         public virtual Account DepositAccount { get; set; }
         private decimal AmountUnderRate { get; set; }
         private TimeSpan TimePeriod { get; set; } // время на которое клиет кладёт сумму на дипозит 
@@ -19,6 +22,8 @@ namespace BankApplication.Models.AccountOperationModels
         public string OperationCode { get; private set; }
         public decimal InterestRate { get; set; }
         public string CardNumber { get; private set; }
+
+        public OperationResult operationResult { get; set; }
 
         /// <summary>
         /// For Create Deposit
@@ -33,7 +38,7 @@ namespace BankApplication.Models.AccountOperationModels
             AmountUnderRate = amount;
             CardNumber = cardNumber;
             DepositOperationStartDate = DateTime.Now;
-            DepositOperationEndDate = DepositOperationEndDate;
+            DepositOperationEndDate = depositOperationEndDate;
             OperationCode = Guid.NewGuid().ToString().Substring(0, 12);
 
             TimePeriod = DepositOperationEndDate.Subtract(DepositOperationStartDate);

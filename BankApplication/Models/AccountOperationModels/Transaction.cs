@@ -1,5 +1,7 @@
 ﻿using BankApplication.Models.AccountModel;
 using BankApplication.Models.AccountOperationModels.Interface;
+using BankApplication.Models.AccountOperationModels.OperationResultStatus;
+using BankApplication.Models.AccountOperationModels.OperationTypes;
 using BankApplication.Models.PersonModel;
 using System;
 using System.Collections.Generic;
@@ -12,11 +14,14 @@ namespace BankApplication.Models.AccountOperationModels
     public class Transaction : IOperation
     {
         public int TransactionID { get; private set; }
+        public OperationType OperationType { get; set; }
         public virtual Account FromAccount { get; private set; }
         public Account ToAccount { get; private set; }
         public decimal TransactionAmount { get; private set; }
         public string OperationCode { get; private set; }
         public DateTime TransactionOperationDate { get; private set; }
+        public OperationResult operationResult { get; set; }
+        public string CardNumber { get; private set; }
 
         /// <summary>
         /// For Create transaction

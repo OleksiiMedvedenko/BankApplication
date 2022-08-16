@@ -1,5 +1,7 @@
 ﻿using BankApplication.Models.AccountModel;
 using BankApplication.Models.AccountOperationModels.Interface;
+using BankApplication.Models.AccountOperationModels.OperationResultStatus;
+using BankApplication.Models.AccountOperationModels.OperationTypes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,10 +13,13 @@ namespace BankApplication.Models.AccountOperationModels
     public class WithdrawAmmountFromAccount : IOperation
     {
         public int WithdrawAmmountFromAccountID { get; private set; }
+        public OperationType OperationType { get; set; }
         public virtual Account Account { get; private set; }
         public decimal Amount { get; private set; }
         public string OperationCode { get; private set; }
         public DateTime WithdrawOperationDate { get; private set; }
+        public OperationResult operationResult { get; set; }
+        public string CardNumber { get; private set; }
 
         /// <summary>
         /// For Create operation

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BankApplication.Models.AccountOperationModels.OperationResultInAmount
+namespace BankApplication.Models.AccountOperationModels.OperationResultStatus
 {
     public enum OperationResult
     {

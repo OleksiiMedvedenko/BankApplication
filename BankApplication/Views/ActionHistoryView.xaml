@@ -35,9 +35,9 @@
                 <Grid Grid.Column="0"
                       Grid.Row="0"
                       Margin="20 0 0 0">
-                    
+
                 </Grid>
-                
+
                 <Grid Grid.Column="1"
                       Grid.Row="0"
                       Margin="0 0 10 0"
@@ -56,7 +56,7 @@
                                 Margin="0 0 10 0">
 
                         </DatePicker>
-                        
+
 
                         <editors:SfTextBoxExt AutoCompleteSource="{Binding ActionHistoryOfAccount}"
                                               SearchItemPath="OperationDescription"
@@ -111,6 +111,32 @@
 
                 <Grid Grid.Row="1"
                       Grid.ColumnSpan="2">
+
+
+                    <!--<ListView ItemsSource="{Binding ListOfCardOperationHistory}">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="Code">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding OperationCode}"
+                                                       Foreground="{Binding DisplayColor}">
+
+                                            </TextBlock>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <GridViewColumn
+                                                DisplayMemberBinding="{Binding Name}"
+                                                Header="Name" />
+                                <GridViewColumn
+                                                DisplayMemberBinding="{Binding Description}"
+                                                Header="Description" />
+                            </GridView>
+                        </ListView.View>
+                    </ListView>-->
+
+
                     <DataGrid Margin="0 8 0 0"
                               ItemsSource="{Binding ListOfCardOperationHistory}"
                               CanUserSortColumns="True"
@@ -119,7 +145,18 @@
                               materialDesign:DataGridAssist.CellPadding="11 9 9 9"
                               materialDesign:DataGridAssist.ColumnHeaderPadding="13"
                               HorizontalContentAlignment="Center"
-                              VerticalContentAlignment="Center">
+                              VerticalContentAlignment="Center" 
+                              Foreground="#DDEED9D9" IsSynchronizedWithCurrentItem="False">
+                        <DataGrid.Background>
+                            <SolidColorBrush Color="#FF86A1BB" 
+                                             Opacity="0.2"/>
+                        </DataGrid.Background>
+
+                        <DataGrid.Resources>
+                            <Style BasedOn="{StaticResource {x:Type DataGridColumnHeader}}" TargetType="{x:Type DataGridColumnHeader}">
+                                <Setter Property="Foreground" Value="Blue" />
+                            </Style>
+                        </DataGrid.Resources>
 
                         <DataGrid.Columns>
                             <DataGridCheckBoxColumn Binding="{Binding IsSelected}"
@@ -137,20 +174,21 @@
                                     </Border>
                                 </DataGridCheckBoxColumn.Header>
                             </DataGridCheckBoxColumn>
+
                             <DataGridTextColumn Binding="{Binding OperationCode}"
                                                 Header="Operation Code"
-                                                Foreground="{Binding DisplayColor}"
-                                                EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}" />
-                            <!-- if you want to use the pop up style (MaterialDesignDataGridTextColumnPopupEditingStyle), you must use MaterialDataGridTextColumn -->
+                                                EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}"
+                                                Foreground="Aquamarine">
+                            </DataGridTextColumn>
+
                             <materialDesign:DataGridTextColumn Binding="{Binding NameOfOperation}"
                                                                Header="Operation"
                                                                EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}" />
-                            <!-- set a max length to get an indicator in the editor -->
                             <materialDesign:DataGridTextColumn Binding="{Binding AmountOfMoneyAction}"
                                                                Header="Amount"
                                                                EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}">
                             </materialDesign:DataGridTextColumn>
-                            
+
                             <materialDesign:DataGridTextColumn Binding="{Binding OperationDescription}"
                                                                Header="Operation Description"
                                                                Width="auto"
@@ -169,6 +207,7 @@
                                                 </DataTemplate>
                                             </Setter.Value>
                                         </Setter>
+                                        <Setter Property="Foreground" Value="Azure"/>
                                     </Style>
                                 </DataGridTextColumn.HeaderStyle>
                                 <DataGridTextColumn.ElementStyle>
@@ -182,11 +221,6 @@
                             <materialDesign:DataGridTextColumn Binding="{Binding ActionDate}"
                                                                Header="Operation Date"
                                                                EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}" />
-                            <!-- use custom combo box column to get better combos. Use ItemsSourceBinding as your binding template to be applied to each combo -->
-                            <!--<materialDesign:DataGridComboBoxColumn Header="Date Of Operation"
-                                                                   SelectedValueBinding="{Binding ActionDate}"
-                                                                   ItemsSourceBinding="{Binding RelativeSource={RelativeSource FindAncestor, 
-                                                                   AncestorType={x:Type DataGrid}}, Path=DataContext.Foods}" />-->
                         </DataGrid.Columns>
                     </DataGrid>
                 </Grid>

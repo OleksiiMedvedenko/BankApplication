@@ -16,6 +16,7 @@ namespace BankApplication.Models.PersonModel
         public Guid ClientUniqueNumber { get; private set; }
         public byte?[] UserImage { get; private set; }
         public byte[] PassportImage { get; private set; }
+        public bool IsActive { get; private set; }
 
         public virtual ObservableCollection<Card> Cards { get; private set; }
 
