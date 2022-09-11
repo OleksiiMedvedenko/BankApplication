@@ -20,6 +20,6 @@ namespace BankApplication.Repository.Interfaces
         /// <returns></returns>
         DatabaseQueryResult<Client> GetClient(string parameter);
 
-        DatabaseQueryResult<ObservableCollection<Client>> GetClients(); // couse check on UNIQUE value
+        DatabaseQueryResult<ObservableCollection<Client>> GetActiveClients(); // couse check on UNIQUE value
     }
 }
