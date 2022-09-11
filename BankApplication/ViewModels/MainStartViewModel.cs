@@ -26,6 +26,10 @@ namespace BankApplication.ViewModels
         public ICommand OpenTopMenuHomeViewButtonCommandClick { get; set; }
         public ICommand OpenActionHistoryViewButtonClickCommand { get; set; }
         public ICommand OpenBlikViewButtonClickCommand { get; set; }
+        public ICommand OpenTopMenuTransactionViewButtonClickCommand { get; set; }
+        public ICommand OpenTopMenuDepositViewButtonCommandClick { get; set; }
+        public ICommand OpenTopMenuAccountViewButtonCommandClick { get; set; }
+        public ICommand CloseApplicationCommand { get; set; }
 
         public MainStartViewModel(IRegionManager regionManager, IContainerExtension containerExtension, IEventAggregator eventAggregator)
         {
@@ -42,6 +46,15 @@ namespace BankApplication.ViewModels
             OpenTopMenuHomeViewButtonCommandClick = new DelegateCommand(OpenTopMenuHome);
             OpenActionHistoryViewButtonClickCommand = new DelegateCommand(OpenActionHistoryView);
             OpenBlikViewButtonClickCommand = new DelegateCommand(OpenBlikView);
+            OpenTopMenuTransactionViewButtonClickCommand = new DelegateCommand(OpenTransactionView);
+            OpenTopMenuDepositViewButtonCommandClick = new DelegateCommand(OpenTopMenuDeposit);
+            OpenTopMenuAccountViewButtonCommandClick = new DelegateCommand(OpenTopMenuAccount);
+            CloseApplicationCommand = new DelegateCommand(CloseApplication);
+        }
+
+        private void CloseApplication()
+        {
+            Environment.Exit(0);
         }
 
         private void ShowMessage(string message)
@@ -105,6 +118,45 @@ namespace BankApplication.ViewModels
         {
             IRegion region = _regionManager.Regions["MainRegion"];
             var view = _containerExtension.Resolve<BliKOperationView>();
+
+            foreach (var v in region.Views)
+            {
+                region.Remove(v);
+            }
+
+            region.Add(view);
+        }
+
+        private void OpenTransactionView()
+        {
+            IRegion region = _regionManager.Regions["MainRegion"];
+            var view = _containerExtension.Resolve<TransactionView>();
+
+            foreach (var v in region.Views)
+            {
+                region.Remove(v);
+            }
+
+            region.Add(view);
+        }
+
+        private void OpenTopMenuDeposit()
+        {
+            IRegion region = _regionManager.Regions["MainRegion"];
+            var view = _containerExtension.Resolve<DepositView>();
+
+            foreach (var v in region.Views)
+            {
+                region.Remove(v);
+            }
+
+            region.Add(view);
+        }
+
+        private void OpenTopMenuAccount()
+        {
+            IRegion region = _regionManager.Regions["MainRegion"];
+            var view = _containerExtension.Resolve<AccountView>();
 
             foreach (var v in region.Views)
             {

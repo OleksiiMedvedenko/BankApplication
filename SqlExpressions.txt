@@ -1,6 +1,6 @@
 --Create DATABASE [BankApplication.database]
 
---use [BankApplication.database]
+use [BankApplication.database]
 
 CREATE TABLE Clients 
 (
@@ -48,6 +48,18 @@ CREATE TABLE Cards
 	DateOfCardCreate DATETIME NOT NULL,
 )
 
+ALTER TABLE Cards
+ALTER COLUMN  CardNumber VARCHAR(20)
+
+ALTER TABLE Cards
+ADD Amount Decimal(5,2);
+
+INSERT INTO Cards (ClientID, CVC2Code, CardNumber, PINCode, CardCurrency, IsActive, DateOfCardCreate, Amount)
+VALUES 
+(1, 361, '4405354087824383', 5414, 1, 1, '2008-11-11 15:35:44', 431),
+(1, 235, '4149495874130400', 9521, 3, 1, '2008-11-11 16:35:44', 154),
+(2, 361, '4246575514909644', 8231, 1, 1, '2008-11-11 15:35:44', 250)
+
 
 CREATE TABLE Accounts
 (
@@ -59,6 +71,10 @@ CREATE TABLE Accounts
 	AccountCode VARCHAR(40) UNIQUE NOT NULL,
 	IsActive BIT DEFAULT 1
 )
+
+INSERT INTO Accounts (ClientID, Login, Password, RegistrationDate, AccountCode, IsActive) Values 
+(1, 'MA@gmail.com', 'pass123', '2008-11-11 15:35:44', '26283-td4he-7323-72f2', 1),
+(2, 'SJ@gmail.com', 'pass123', '2008-11-11 15:37:54', '37127-13eg7-y262-6f2d', 1)
 
 CREATE TABLE OperationTypes 
 (
@@ -81,6 +97,7 @@ CREATE TABLE OperationResultStatus
 
 INSERT INTO OperationResultStatus (OperationStatuseID ,Status)
 VALUES 
+(0, 'Transaction Status')
 (5 ,'Income'),
 (7 ,'Lesion')
 
@@ -138,6 +155,20 @@ CREATE TABLE TransactionOperation
 	CardNumber VARCHAR NOT NULL,
 )
 
+ALTER TABLE TransactionOperation
+ALTER COLUMN  CardNumber VARCHAR(20)
+
+ALTER TABLE TransactionOperation
+ADD ToCard VARCHAR(20);
+
+ALTER TABLE TransactionOperation
+DROP COLUMN OperationResultStatus;
+
+INSERT INTO TransactionOperation (OperationType, FromAccountID, ToAccountID, Amount, TransactionOperationDate, OperationCode
+, OperationResultStatus, CardNumber, ToCard)
+Values
+(3, 1, 2, 30, '2010-11-11 15:35:44', '1421-trh-135-hds', 0, '4405354087824383', '4246575514909644')
+
 CREATE TABLE ActionRecordsHistory
 (
 	ActionID INT NOT NULL PRIMARY KEY  IDENTITY(1,1),
@@ -147,3 +178,8 @@ CREATE TABLE ActionRecordsHistory
 	Description NVARCHAR(255),
 	ActionDate DATETIME NOT NULL,
 )
+
+INSERT INTO ActionRecordsHistory (OperationID, AccountID, Title, Description, ActionDate)
+Values
+(1, 1, 'Transaction', 'Transaction From To account', '2010-11-11 15:35:44'),
+(1, 2, 'Transaction', 'Transaction From To account', '2010-11-11 15:35:44')

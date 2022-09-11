@@ -18,73 +18,67 @@
                 HorizontalAlignment="Stretch"
                 VerticalAlignment="Stretch">
             <Border.Background>
-                <SolidColorBrush Color="LightSlateGray"
-                                 Opacity="0.4"/>
+                <SolidColorBrush Color="#191330"
+                                 Opacity="0.8"/>
             </Border.Background>
+        </Border>
 
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="auto"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="0.15*"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.15*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
 
-                <Grid Grid.Column="0"
+            <Grid Grid.Column="0"
                       Grid.Row="0"
                       Margin="20 0 0 0">
 
-                </Grid>
+            </Grid>
 
-                <Grid Grid.Column="1"
+            <Grid Grid.Column="1"
                       Grid.Row="0"
                       Margin="0 0 10 0"
-                      HorizontalAlignment="Right">
+                      HorizontalAlignment="Left">
 
-                    <StackPanel Orientation="Horizontal"
+                <StackPanel Orientation="Horizontal"
                                 Margin="0 20 0 0">
-                        <DatePicker HorizontalAlignment="Left"
-                                FontSize="0.1"
-                                materialDesign:TextFieldAssist.DecorationVisibility="Hidden" 
-                                BorderThickness="0"
-                                Text="{Binding Search}"
-                                SelectedDate="{Binding Path=SelectedDateODatePicker,
-                                                       Mode=TwoWay,
-                                                       TargetNullValue={x:Static System:DateTime.Now}}"
-                                Margin="0 0 10 0">
 
-                        </DatePicker>
+                    <editors:SfTextBoxExt AutoCompleteSource="{Binding ActionHistoryOfAccount}"
+                                          SearchItemPath="OperationDescription"
+                                          AutoCompleteMode="Suggest"
+                                          SuggestionMode="Contains"
+                                          TextHighlightMode="MultipleOccurrence"
+                                          HighlightedTextColor="Red"
+                                          Margin="3 0 0 0"
+                                          Width="auto"
+                                          Height="30"
+                                          materialDesign:HintAssist.Hint="Enter Description"
+                                          materialDesign:HintAssist.Foreground="White"
+                                          MinWidth="250"
+                                          Background="Transparent"
+                                          Foreground="White"
+                                          TextAlignment="Left"
+                                          HorizontalAlignment="Left"
+                                          VerticalAlignment="Center"
+                                          Text="{Binding InputOperationDescription}"
+                                          FontFamily="Fonts/#Dosis">
 
+                        <TextBox.Resources>
+                            <Style TargetType="{x:Type Border}">
+                                <Setter Property="CornerRadius" Value="7"/>
+                                <Setter Property="Background" Value="{StaticResource PrimaryHueMidBrush}"/>
+                            </Style>
+                        </TextBox.Resources>
+                        <TextBox.InputBindings>
+                            <KeyBinding Key="Enter" Command="{Binding SearchNotIncludedComponentInOrderButtonClickCommand}"/>
+                        </TextBox.InputBindings>
+                    </editors:SfTextBoxExt>
 
-                        <editors:SfTextBoxExt AutoCompleteSource="{Binding ActionHistoryOfAccount}"
-                                              SearchItemPath="OperationDescription"
-                                              AutoCompleteMode="Suggest"
-                                              SuggestionMode="Contains"
-                                              TextHighlightMode="MultipleOccurrence"
-                                              HighlightedTextColor="Red"
-                                              Margin="3 0 0 0"
-                                              Width="auto"
-                                              materialDesign:HintAssist.Hint="Enter Description"
-                                              MinWidth="187"
-                                              Height="30"
-                                              TextAlignment="Left"
-                                              HorizontalAlignment="Left"
-                                              VerticalAlignment="Center"
-                                              Text="{Binding InputOperationDescription}">
-                            <TextBox.Resources>
-                                <Style TargetType="{x:Type Border}">
-                                    <Setter Property="CornerRadius" Value="7"/>
-                                    <Setter Property="Background" Value="{StaticResource PrimaryHueMidBrush}"/>
-                                </Style>
-                            </TextBox.Resources>
-                            <TextBox.InputBindings>
-                                <KeyBinding Key="Enter" Command="{Binding SearchNotIncludedComponentInOrderButtonClickCommand}"/>
-                            </TextBox.InputBindings>
-                        </editors:SfTextBoxExt>
-
-                        <Button Width="30"
+                    <Button Width="30"
                                 Height="30"
                                 FontSize="11"
                                 HorizontalAlignment="Center"
@@ -94,137 +88,392 @@
                                 materialDesign:ShadowAssist.ShadowDepth="Depth2"
                                 Style="{StaticResource MaterialDesignFlatMidBgButton}"
                                 Command="{Binding SearchActionRecordButtonClickCommand}">
-                            <Button.ToolTip>
-                                <TextBlock Text="Search Action Record"/>
-                            </Button.ToolTip>
+                        <Button.ToolTip>
+                            <TextBlock Text="Search Action Record"/>
+                        </Button.ToolTip>
 
-                            <Image Source="Images/SearchIcon.png"
+                        <Image Source="Images/SearchIcon.png"
                                            Height="20" Width="30" Stretch="Uniform"
                                            VerticalAlignment="Center"
                                            HorizontalAlignment="Center"
                                            RenderOptions.BitmapScalingMode="HighQuality"
                                    Margin="-15 -14 -13 -15">
-                            </Image>
-                        </Button>
-                    </StackPanel>
-                </Grid>
+                        </Image>
+                    </Button>
+                </StackPanel>
+            </Grid>
 
-                <Grid Grid.Row="1"
-                      Grid.ColumnSpan="2">
+            <Grid Grid.Row="1"
+                  Grid.ColumnSpan="2"
+                  Margin="12 8 12 8">
 
+                <Border BorderThickness="3"
+                        Panel.ZIndex="1"
+                        Margin="0 5 0 -2"
+                        CornerRadius="5">
 
-                    <!--<ListView ItemsSource="{Binding ListOfCardOperationHistory}">
-                        <ListView.View>
-                            <GridView>
-                                <GridViewColumn Header="Code">
-                                    <GridViewColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <TextBlock Text="{Binding OperationCode}"
-                                                       Foreground="{Binding DisplayColor}">
+                    <Border.BorderBrush>
+                        <LinearGradientBrush StartPoint="0,0" 
+                                                 EndPoint="1,2">
+                            <GradientStop Color="#18026e" 
+                                                              Offset="0.0"/>
+                            <GradientStop Color="#0d0238"
+                                                              Offset="0.35"/>
+                        </LinearGradientBrush>
+                    </Border.BorderBrush>
 
-                                            </TextBlock>
-                                        </DataTemplate>
-                                    </GridViewColumn.CellTemplate>
-                                </GridViewColumn>
-                                <GridViewColumn
-                                                DisplayMemberBinding="{Binding Name}"
-                                                Header="Name" />
-                                <GridViewColumn
-                                                DisplayMemberBinding="{Binding Description}"
-                                                Header="Description" />
-                            </GridView>
-                        </ListView.View>
-                    </ListView>-->
+                </Border>
 
+                <DataGrid Margin="0 8 0 0"
+                          ItemsSource="{Binding ListOfCardOperationHistory}"
+                          CanUserSortColumns="True"
+                          CanUserAddRows="False"
+                          AutoGenerateColumns="False"
+                          materialDesign:DataGridAssist.CellPadding="11 9 9 9"
+                          materialDesign:DataGridAssist.ColumnHeaderPadding="13"
+                          HorizontalContentAlignment="Center"
+                          VerticalContentAlignment="Center" 
+                          Foreground="#f5f3e1" 
+                          IsSynchronizedWithCurrentItem="False"
+                          Panel.ZIndex="0"
+                          FontFamily="Fonts/#Dosis"
+                          FontWeight="SemiBold">
 
-                    <DataGrid Margin="0 8 0 0"
-                              ItemsSource="{Binding ListOfCardOperationHistory}"
-                              CanUserSortColumns="True"
-                              CanUserAddRows="False"
-                              AutoGenerateColumns="False"
-                              materialDesign:DataGridAssist.CellPadding="11 9 9 9"
-                              materialDesign:DataGridAssist.ColumnHeaderPadding="13"
-                              HorizontalContentAlignment="Center"
-                              VerticalContentAlignment="Center" 
-                              Foreground="#DDEED9D9" IsSynchronizedWithCurrentItem="False">
-                        <DataGrid.Background>
-                            <SolidColorBrush Color="#FF86A1BB" 
-                                             Opacity="0.2"/>
-                        </DataGrid.Background>
+                    <DataGrid.Background>
+                        <LinearGradientBrush StartPoint="0,0.1" 
+                                             EndPoint="1,2.3"
+                                             Opacity="0.5">
+                            <GradientStop Color="#2d1c63" 
+                                                              Offset="0.0"/>
+                            <GradientStop Color="#34275c"
+                                                              Offset="0.35"/>
+                        </LinearGradientBrush>
+                    </DataGrid.Background>
 
-                        <DataGrid.Resources>
-                            <Style BasedOn="{StaticResource {x:Type DataGridColumnHeader}}" TargetType="{x:Type DataGridColumnHeader}">
-                                <Setter Property="Foreground" Value="Blue" />
-                            </Style>
-                        </DataGrid.Resources>
+                    <DataGrid.RowStyle>
+                        <Style TargetType="DataGridRow"
+                               BasedOn="{StaticResource MaterialDesignDataGridRow}">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Status}" Value="Lesion">
+                                    <Setter Property="Foreground" Value="Red"></Setter>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding Status}" Value="Income">
+                                    <Setter Property="Foreground" Value="Green"></Setter>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding Status}" Value="TransactionStatus">
+                                    <Setter Property="Foreground" Value="Yellow"></Setter>
+                                </DataTrigger>
 
-                        <DataGrid.Columns>
-                            <DataGridCheckBoxColumn Binding="{Binding IsSelected}"
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Opacity" Value="0.7"/>
+                                </Trigger>
+
+                                <Trigger Property="IsMouseCaptured" Value="True">
+                                    <Setter Property="IsSelected" Value="False"/>
+                                </Trigger>
+                            </Style.Triggers>
+                            
+                            <!--<Setter Property="IsHitTestVisible" Value="False"/>-->
+
+                        </Style>
+                    </DataGrid.RowStyle>
+
+                    <DataGrid.Resources>
+                        <Style TargetType="DataGrid"
+                               BasedOn="{StaticResource MaterialDesignDataGrid}">
+                            <Setter Property="VerticalGridLinesBrush" Value="AntiqueWhite"/>
+                            <Setter Property="HorizontalGridLinesBrush" Value="Wheat"/>
+
+                        </Style>
+
+                        <Style BasedOn="{StaticResource {x:Type DataGridColumnHeader}}" 
+                               TargetType="{x:Type DataGridColumnHeader}">
+                            <Setter Property="Background">
+                                <Setter.Value>
+                                    <LinearGradientBrush StartPoint="0,0.1" 
+                                                 EndPoint="1,2.3">
+                                        <GradientStop Color="#2d1c63" 
+                                                              Offset="0.0"/>
+                                        <GradientStop Color="#34275c"
+                                                              Offset="0.75"/>
+                                    </LinearGradientBrush>
+                                </Setter.Value>
+                            </Setter>
+                            <Setter Property="Opacity" Value="0.8"/>
+                        </Style>
+                    </DataGrid.Resources>
+
+                    <DataGrid.Columns>
+                        <DataGridCheckBoxColumn Binding="{Binding IsSelected}"
                                                     ElementStyle="{StaticResource MaterialDesignDataGridCheckBoxColumnStyle}"
                                                     EditingElementStyle="{StaticResource MaterialDesignDataGridCheckBoxColumnEditingStyle}">
-                                <DataGridCheckBoxColumn.Header>
-                                    <!--padding to allow hit test to pass thru for sorting -->
-                                    <Border Background="Transparent"
+                            <DataGridCheckBoxColumn.HeaderStyle>
+                                <Style TargetType="DataGridColumnHeader"
+                                           BasedOn="{StaticResource MaterialDesignDataGridColumnHeader}">
+
+                                    <Setter Property="Foreground" Value="Azure"/>
+                                </Style>
+                            </DataGridCheckBoxColumn.HeaderStyle>
+
+                            <DataGridCheckBoxColumn.Header>
+                                <Border Background="Transparent"
+                                            BorderBrush="White"
                                             Padding="6 0 6 0"
                                             HorizontalAlignment="Center">
-                                        <CheckBox HorizontalAlignment="Center"
+                                    <CheckBox HorizontalAlignment="Center"
                                                   DataContext="{Binding RelativeSource={RelativeSource 
                                                                         AncestorType={x:Type DataGrid}}, Path=DataContext}"
-                                                  IsChecked="{Binding IsAllItems3Selected}"/>
-                                    </Border>
-                                </DataGridCheckBoxColumn.Header>
-                            </DataGridCheckBoxColumn>
+                                                  IsChecked="{Binding IsAllItems3Selected}"
+                                                  BorderBrush="AliceBlue">
+                                    </CheckBox>
+                                </Border>
+                            </DataGridCheckBoxColumn.Header>
+                        </DataGridCheckBoxColumn>
 
-                            <DataGridTextColumn Binding="{Binding OperationCode}"
-                                                Header="Operation Code"
+                        <DataGridTextColumn Binding="{Binding OperationCode}"
+                                                Header="Code"
                                                 EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}"
                                                 Foreground="Aquamarine">
-                            </DataGridTextColumn>
 
-                            <materialDesign:DataGridTextColumn Binding="{Binding NameOfOperation}"
-                                                               Header="Operation"
-                                                               EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}" />
-                            <materialDesign:DataGridTextColumn Binding="{Binding AmountOfMoneyAction}"
+                            <DataGridColumn.HeaderStyle>
+                                <Style TargetType="DataGridColumnHeader"
+                                           BasedOn="{StaticResource MaterialDesignDataGridColumnHeader}">
+                                    <Setter Property="HorizontalAlignment"
+                                                Value="Center" />
+                                    <Setter Property="ContentTemplate">
+                                        <Setter.Value>
+                                            <DataTemplate>
+                                                <TextBlock TextWrapping="Wrap"
+                                                           Text="{Binding}"
+                                                           TextAlignment="Right"
+                                                           FontWeight="Medium"
+                                                           FontFamily="Fonts/#Dosis"/>
+                                            </DataTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                    <Setter Property="Foreground" Value="Azure"/>
+
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Foreground" Value="Wheat"/>
+                                        </Trigger>
+
+                                        <Trigger Property="SortDirection" Value="Ascending">
+                                            <Setter Property="Foreground" Value="Yellow"/>
+                                        </Trigger>
+
+                                        <Trigger Property="SortDirection" Value="Descending">
+                                            <Setter Property="Foreground" Value="OrangeRed"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </DataGridColumn.HeaderStyle>
+
+                        </DataGridTextColumn>
+
+                        <materialDesign:DataGridTextColumn Binding="{Binding OperationTitle}"
+                                                           Header="Operation"
+                                                           EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}">
+
+                            <DataGridColumn.HeaderStyle>
+                                <Style TargetType="DataGridColumnHeader"
+                                           BasedOn="{StaticResource MaterialDesignDataGridColumnHeader}">
+                                    <Setter Property="HorizontalAlignment"
+                                                Value="Center" />
+                                    <Setter Property="ContentTemplate">
+                                        <Setter.Value>
+                                            <DataTemplate>
+                                                <TextBlock TextWrapping="Wrap"
+                                                           Text="{Binding}"
+                                                           TextAlignment="Center"
+                                                           FontWeight="Medium"                                                         
+                                                           FontFamily="Fonts/#Dosis"/>
+                                            </DataTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                    <Setter Property="Foreground" Value="Azure"/>
+
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Foreground" Value="Wheat"/>
+                                        </Trigger>
+
+                                        <Trigger Property="SortDirection" Value="Ascending">
+                                            <Setter Property="Foreground" Value="Yellow"/>
+                                        </Trigger>
+
+                                        <Trigger Property="SortDirection" Value="Descending">
+                                            <Setter Property="Foreground" Value="OrangeRed"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </DataGridColumn.HeaderStyle>
+                        </materialDesign:DataGridTextColumn>
+
+
+
+                        <materialDesign:DataGridTextColumn Binding="{Binding AmountOfMoneyAction}"
                                                                Header="Amount"
                                                                EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}">
-                            </materialDesign:DataGridTextColumn>
 
-                            <materialDesign:DataGridTextColumn Binding="{Binding OperationDescription}"
-                                                               Header="Operation Description"
+                            <DataGridColumn.HeaderStyle>
+                                <Style TargetType="DataGridColumnHeader"
+                                           BasedOn="{StaticResource MaterialDesignDataGridColumnHeader}">
+                                    <Setter Property="HorizontalAlignment"
+                                                Value="Center" />
+                                    <Setter Property="ContentTemplate">
+                                        <Setter.Value>
+                                            <DataTemplate>
+                                                <TextBlock TextWrapping="Wrap"
+                                                           Text="{Binding}"
+                                                           TextAlignment="Center" />
+                                            </DataTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                    <Setter Property="Foreground" Value="Azure"/>
+
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Foreground" Value="Wheat"/>
+                                        </Trigger>
+
+                                        <Trigger Property="SortDirection" Value="Ascending">
+                                            <Setter Property="Foreground" Value="Yellow"/>
+                                        </Trigger>
+
+                                        <Trigger Property="SortDirection" Value="Descending">
+                                            <Setter Property="Foreground" Value="OrangeRed"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </DataGridColumn.HeaderStyle>
+                        </materialDesign:DataGridTextColumn>
+
+
+                        <materialDesign:DataGridTextColumn Binding="{Binding OperationDescription, Mode=OneWay}"
+                                                               Header="Description"
                                                                Width="auto"
                                                                EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}">
-                                <DataGridTextColumn.HeaderStyle>
-                                    <Style TargetType="{x:Type DataGridColumnHeader}"
+                            <DataGridTextColumn.HeaderStyle>
+                                <Style TargetType="{x:Type DataGridColumnHeader}"
                                            BasedOn="{StaticResource MaterialDesignDataGridColumnHeader}">
-                                        <Setter Property="HorizontalAlignment"
+                                    <Setter Property="HorizontalAlignment"
                                                 Value="Center" />
-                                        <Setter Property="ContentTemplate">
-                                            <Setter.Value>
-                                                <DataTemplate>
-                                                    <TextBlock TextWrapping="Wrap"
+                                    <Setter Property="ContentTemplate">
+                                        <Setter.Value>
+                                            <DataTemplate>
+                                                <TextBlock TextWrapping="Wrap"
                                                                Text="{Binding}"
                                                                TextAlignment="Right" />
-                                                </DataTemplate>
-                                            </Setter.Value>
-                                        </Setter>
-                                        <Setter Property="Foreground" Value="Azure"/>
-                                    </Style>
-                                </DataGridTextColumn.HeaderStyle>
-                                <DataGridTextColumn.ElementStyle>
-                                    <Style  TargetType="{x:Type TextBlock}">
-                                        <Setter Property="HorizontalAlignment"
-                                                Value="Center" />
-                                    </Style>
-                                </DataGridTextColumn.ElementStyle>
-                            </materialDesign:DataGridTextColumn>
+                                            </DataTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                    <Setter Property="Foreground" Value="Azure"/>
 
-                            <materialDesign:DataGridTextColumn Binding="{Binding ActionDate}"
-                                                               Header="Operation Date"
-                                                               EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}" />
-                        </DataGrid.Columns>
-                    </DataGrid>
-                </Grid>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Foreground" Value="Wheat"/>
+                                        </Trigger>
+
+                                        <Trigger Property="SortDirection" Value="Ascending">
+                                            <Setter Property="Foreground" Value="Yellow"/>
+                                        </Trigger>
+
+                                        <Trigger Property="SortDirection" Value="Descending">
+                                            <Setter Property="Foreground" Value="OrangeRed"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </DataGridTextColumn.HeaderStyle>
+                            <DataGridTextColumn.ElementStyle>
+                                <Style  TargetType="{x:Type TextBlock}">
+                                    <Setter Property="HorizontalAlignment"
+                                                Value="Center" />
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                        </materialDesign:DataGridTextColumn>
+
+                        <materialDesign:DataGridTextColumn Binding="{Binding ActionDate, Mode=OneWay}"
+                                                           Header="Date"
+                                                           EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}">
+
+                            <DataGridColumn.HeaderStyle>
+                                <Style TargetType="DataGridColumnHeader"
+                                           BasedOn="{StaticResource MaterialDesignDataGridColumnHeader}">
+                                    <Setter Property="HorizontalAlignment"
+                                                Value="Center" />
+                                    <Setter Property="ContentTemplate">
+                                        <Setter.Value>
+                                            <DataTemplate>
+                                                <TextBlock TextWrapping="Wrap"
+                                                               Text="{Binding}"
+                                                               TextAlignment="Center" />
+                                            </DataTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                    <Setter Property="Foreground" Value="Azure"/>
+
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Foreground" Value="Wheat"/>
+                                        </Trigger>
+
+                                        <Trigger Property="SortDirection" Value="Ascending">
+                                            <Setter Property="Foreground" Value="Yellow"/>
+                                        </Trigger>
+
+                                        <Trigger Property="SortDirection" Value="Descending">
+                                            <Setter Property="Foreground" Value="OrangeRed"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </DataGridColumn.HeaderStyle>
+                        </materialDesign:DataGridTextColumn>
+                        <DataGridTemplateColumn>
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <materialDesign:PopupBox HorizontalAlignment="Center"
+                                                             PlacementMode="BottomAndAlignRightEdges"
+                                                             StaysOpen="False"
+                                                             PopupUniformCornerRadius="10"
+                                                             Style="{DynamicResource MaterialDesignMultiFloatingActionAccentPopupBox}"
+                                                             materialDesign:ThemeAssist.Theme="Dark">
+
+                                        <materialDesign:PopupBox.ToggleContent>
+                                            <Image Source="Images/actionHistoryDescription.png"
+                                                   Height="23"
+                                                   Width="23"
+                                                   RenderOptions.BitmapScalingMode="HighQuality"
+                                                   Margin="0 -5 0 0"/>
+                                        </materialDesign:PopupBox.ToggleContent>
+
+                                        <StackPanel Margin="10 10 10 6"
+                                                        Orientation="Horizontal"
+                                                        HorizontalAlignment="Center">
+                                            <ListView ItemsSource="{Binding DataContext.FullActionDescription, RelativeSource={RelativeSource Mode=FindAncestor,
+                                                                                AncestorType={x:Type ItemsControl}}}">
+                                                <ListView.ItemTemplate>
+                                                    <DataTemplate>
+                                                        <StackPanel Orientation="Vertical">
+                                                            <TextBlock Text="test"
+                                                                           Margin="0 0 0 0"
+                                                                           Cursor="Hand"
+                                                                           FontWeight="SemiBold"
+                                                                           FontFamily="Fonts/#Dosis"
+                                                                           Foreground="White">
+                                                            </TextBlock>
+                                                        </StackPanel>
+                                                    </DataTemplate>
+                                                </ListView.ItemTemplate>
+                                            </ListView>
+                                        </StackPanel>
+                                    </materialDesign:PopupBox>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
             </Grid>
-        </Border>
+        </Grid>
     </Grid>
 </UserControl>

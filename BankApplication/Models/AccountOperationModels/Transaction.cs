@@ -15,12 +15,12 @@ namespace BankApplication.Models.AccountOperationModels
     {
         public int TransactionID { get; private set; }
         public OperationType OperationType { get; set; }
-        public virtual Account FromAccount { get; private set; }
+        public Account FromAccount { get; private set; }
         public Account ToAccount { get; private set; }
-        public decimal TransactionAmount { get; private set; }
-        public string OperationCode { get; private set; }
+        public decimal OperationAmount { get; set; }
+        public string OperationCode { get; set; }
         public DateTime TransactionOperationDate { get; private set; }
-        public OperationResult operationResult { get; set; }
+        public ResultStatus OperationResultStatus { get; set; }
         public string CardNumber { get; private set; }
 
         /// <summary>
@@ -34,15 +34,17 @@ namespace BankApplication.Models.AccountOperationModels
         {
             FromAccount = fromAccount;
             ToAccount = toAccount;
-            TransactionAmount = transactionAmount;
+            OperationAmount = transactionAmount;
             OperationCode = Guid.NewGuid().ToString().Substring(0, 12);
             TransactionOperationDate = DateTime.Now;
+
+            OperationResultStatus = ResultStatus.TransactionStatus;
         }
 
         public void TransactionExecution(string fromCardNumber, string toCardNumber)
         {
-            FromAccount.Client.Cards.SingleOrDefault(x=> x.CardNumber == $"{fromCardNumber}").AmountOfMoney -= TransactionAmount;
-            ToAccount.Client.Cards.SingleOrDefault(x => x.CardNumber == $"{toCardNumber}").AmountOfMoney += TransactionAmount;
+            FromAccount.Client.Cards.SingleOrDefault(x=> x.CardNumber == $"{fromCardNumber}").AmountOfMoney -= OperationAmount;
+            ToAccount.Client.Cards.SingleOrDefault(x => x.CardNumber == $"{toCardNumber}").AmountOfMoney += OperationAmount;
         }
 
         public override string ToString()

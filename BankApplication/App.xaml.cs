@@ -31,6 +31,12 @@ namespace BankApplication
             containerRegistry.Register<IHomeViewModel, HomeViewModel>();
             containerRegistry.Register<IActionHistoryViewModel, ActionHistoryViewModel>();
             containerRegistry.Register<IBliKOperationViewModel, BliKOperationViewModel>();
+            containerRegistry.Register<ITransactionViewModel, TransactionViewModel>();
+            containerRegistry.Register<IDepositViewModel, DepositViewModel>();
+            containerRegistry.Register<IAccountViewModel, AccountViewModel>();
+            containerRegistry.Register<IAccountPersonalSettingViewModel, AccountPersonalSettingViewModel>();
+            containerRegistry.Register<IAccountSecuritySettingViewModel, AccountSecuritySettingViewModel>();
+            containerRegistry.Register<IAccountStatisticsSettingsViewModel, AccountStatisticsSettingsViewModel>();
         }
     }
 }

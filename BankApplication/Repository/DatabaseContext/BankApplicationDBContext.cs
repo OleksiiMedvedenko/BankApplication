@@ -21,10 +21,10 @@ namespace BankApplication.Repository.DatabaseContext
         }
 
         public DbSet<Account> Accounts { get; set; }
-        public DbSet<AddingAmountToAccount> AddingAmountToAccounts { get; set; }
+        public DbSet<AddingAmount> AddingAmountToAccounts { get; set; }
         public DbSet<Deposit> Deposits { get; set; }
         public DbSet<Transaction> Transactions { get; set; }
-        public DbSet<WithdrawAmmountFromAccount> WithdrawAmmountFromAccounts { get; set; }
+        public DbSet<WithdrawAmount> WithdrawAmmountFromAccounts { get; set; }
 
         public DbSet<ActionHistory<IOperation>> ActionHistory { get; set; }
         public DbSet<Card> Cards { get; set; }

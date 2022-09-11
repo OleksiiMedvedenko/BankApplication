@@ -1,0 +1,254 @@
+﻿<UserControl x:Class="BankApplication.Views.AccountView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:BankApplication.Views"
+             mc:Ignorable="d"  
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:prism="http://prismlibrary.com/"
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+             prism:ViewModelLocator.AutoWireViewModel="True"
+             d:DesignHeight="450" d:DesignWidth="800"
+             xmlns:editors="http://schemas.syncfusion.com/wpf">
+
+    <UserControl.Resources>
+        <ControlTemplate x:Key="LeftMenuButtons" 
+                         TargetType="Button">
+            <Grid Name="Btn"
+                  Height="69">
+                <Grid>
+
+                    <Border CornerRadius="9" 
+                        Margin="0,0,0,0">
+
+                        <Border.Background>
+                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,2">
+                                <GradientStop Color="#5bc3FF" Offset="0.0"/>
+                                <GradientStop Color="#4623c4" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Border.Background>
+                        <Border.Style>
+                            <Style TargetType="Border">
+                                <Setter Property="Opacity" Value="0.5"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding RelativeSource={RelativeSource
+                                            Mode=FindAncestor,
+                                            AncestorType={x:Type Button}},
+                                            Path = IsPressed}" Value="true">
+                                        <Setter Property="Margin" Value="0,2,0,0"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Border.Style>
+                    </Border>
+
+                    <Label Content="{TemplateBinding Content}"
+                            Background="Transparent"
+                            FontSize="15" 
+                            VerticalAlignment="Center"
+                            Cursor="Hand"
+                            FontFamily="Fonts/#Dosis"
+                            FontWeight="SemiBold">
+                        <Label.Style>
+                            <Style TargetType="Label">
+                                <Setter Property="Foreground" 
+                                        Value="#54bfaa"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Path=IsMouseOver, ElementName=Btn}" 
+                                                    Value="true">
+                                        <Setter Property="Opacity" 
+                                                Value="0.6"/>
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding RelativeSource={RelativeSource
+                                                            Mode=FindAncestor,
+                                                            AncestorType={x:Type Button}},
+                                                            Path = IsPressed}" Value="true">
+                                        <Setter Property="Foreground" 
+                                                Value="#34fab8"/>
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding RelativeSource={RelativeSource
+                                                            Mode=FindAncestor,
+                                                            AncestorType={x:Type Button}},
+                                                            Path = IsFocused}" 
+                                                    Value="true">
+                                        <Setter Property="Foreground" Value="Red"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Label.Style>
+                    </Label>
+
+                    <Border Name="IsSelectedBorder2" 
+                            Background="Transparent" Margin="0 0 0 0"
+                            CornerRadius="8">
+                        <Border.Style>
+                            <Style TargetType="Border">
+                                <Setter Property="Visibility" Value="Hidden"/>
+                                <Setter Property="BorderThickness" Value="1"/>
+                                <Setter Property="BorderBrush" Value="DarkOrange"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding RelativeSource={RelativeSource
+                                        Mode=FindAncestor,
+                                        AncestorType={x:Type Button}},
+                                        Path = IsFocused}" Value="true">
+                                        <Setter Property="Visibility" Value="Visible"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Border.Style>
+                    </Border>
+                </Grid>
+            </Grid>
+        </ControlTemplate>
+    </UserControl.Resources>
+
+    <Grid HorizontalAlignment="Stretch"
+          VerticalAlignment="Stretch">
+
+        <Border CornerRadius="30 3 6 30"
+                materialDesign:ShadowAssist.ShadowDepth="Depth3"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch">
+
+            <Border.Background>
+                <SolidColorBrush Color="#10101f"
+                                 Opacity="0.8"/>
+            </Border.Background>
+        </Border>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="300"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid Grid.Column="1"
+                  Margin="0 20 25 25">
+
+                <ContentControl prism:RegionManager.RegionName="AccountRegion"
+                                                Grid.ColumnSpan="3"
+                                                Grid.Column="0"
+                                                Grid.Row="0"
+                                                Grid.RowSpan="3"/>
+            </Grid>
+
+            <Grid Grid.Column="0" 
+                  Margin="30 25 30 25">
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Row="0">
+                    <Button Template="{StaticResource ResourceKey=LeftMenuButtons}" 
+                            Command="{Binding OpenAccountPersonalSettingViewButtonClick}"
+                            Height="69"
+                            materialDesign:ShadowAssist.ShadowDepth="Depth4"
+                            RenderOptions.BitmapScalingMode="HighQuality">
+                        <Grid>
+                            <TextBlock Text="Account Setting"
+                                       VerticalAlignment="Top"
+                                       Foreground="White"
+                                       FontFamily="Fonts/#Dosis"
+                                       FontSize="19"
+                                       Margin="12 0 0 22"
+                                       FontWeight="Medium"/>
+
+                            <TextBlock Text="Details about your Personal Information"
+                                       TextAlignment="Left"
+                                       Foreground="White"
+                                       FontFamily="Fonts/#Dosis"
+                                       FontSize="14.4"
+                                       FontWeight="Regular"
+                                       Margin="12 0 0 0 "
+                                       VerticalAlignment="Bottom"/>
+                        </Grid>
+                    </Button>
+                </Grid>
+
+                <Grid Grid.Row="1">
+                    <Button Template="{StaticResource ResourceKey=LeftMenuButtons}" 
+                            Command="{Binding OpenAccountStatisticsViewButtonClick}"
+                            Height="69"
+                            materialDesign:ShadowAssist.ShadowDepth="Depth4"
+                            RenderOptions.BitmapScalingMode="HighQuality">
+                        <Grid>
+                            <TextBlock Text="Statistics"
+                                       VerticalAlignment="Top"
+                                       Foreground="White"
+                                       FontFamily="Fonts/#Dosis"
+                                       FontSize="19"
+                                       Margin="12 0 0 22"
+                                       FontWeight="Medium"/>
+
+                            <TextBlock Text="About Your Expenses/Receipts"
+                                       TextAlignment="Left"
+                                       Foreground="White"
+                                       FontFamily="Fonts/#Dosis"
+                                       FontSize="14.4"
+                                       FontWeight="Regular"
+                                       Margin="12 0 0 0 "
+                                       VerticalAlignment="Bottom"/>
+                        </Grid>
+                    </Button>
+                </Grid>
+
+                <Grid Grid.Row="2">
+                    <Button Template="{StaticResource ResourceKey=LeftMenuButtons}" 
+                            Command="{Binding OpenAccountSecuritySettingViewButtonClick}"
+                            Height="69"
+                            materialDesign:ShadowAssist.ShadowDepth="Depth4"
+                            RenderOptions.BitmapScalingMode="HighQuality">
+                        <Grid>
+                            <TextBlock Text="Password And Security"
+                                       VerticalAlignment="Top"
+                                       Foreground="White"
+                                       FontFamily="Fonts/#Dosis"
+                                       FontSize="19"
+                                       Margin="12 0 0 22"
+                                       FontWeight="Medium"/>
+
+                            <TextBlock Text="Details about your Security"
+                                       TextAlignment="Left"
+                                       Foreground="White"
+                                       FontFamily="Fonts/#Dosis"
+                                       FontSize="14.4"
+                                       FontWeight="Regular"
+                                       Margin="12 0 0 0 "
+                                       VerticalAlignment="Bottom"/>
+                        </Grid>
+                    </Button>
+                </Grid>
+
+                <Grid Grid.Row="3">
+                    <Button Template="{StaticResource ResourceKey=LeftMenuButtons}" 
+                            Command="{Binding OpenAccountSecuritySettingViewButtonClick}"
+                            Height="69"
+                            materialDesign:ShadowAssist.ShadowDepth="Depth4"
+                            RenderOptions.BitmapScalingMode="HighQuality">
+                        <Grid>
+
+                        </Grid>
+                    </Button>
+                </Grid>
+
+                <Grid Grid.Row="4">
+                    <Button Template="{StaticResource ResourceKey=LeftMenuButtons}" 
+                            Command="{Binding OpenAccountSecuritySettingViewButtonClick}"
+                            Height="69"
+                            materialDesign:ShadowAssist.ShadowDepth="Depth4"
+                            RenderOptions.BitmapScalingMode="HighQuality">
+                        <Grid>
+                        </Grid>
+                    </Button>
+                </Grid>
+
+            </Grid>
+        </Grid>
+    </Grid>
+</UserControl>

@@ -19,10 +19,10 @@
                 materialDesign:ShadowAssist.ShadowDepth="Depth3"
                 HorizontalAlignment="Stretch"
                 VerticalAlignment="Stretch">
-            
+
             <Border.Background>
-                <SolidColorBrush Color="White"
-                                 Opacity="0.08"/>
+                <SolidColorBrush Color="#4c4991"
+                                 Opacity="0.4"/>
             </Border.Background>
 
             <Grid>
@@ -65,11 +65,15 @@
                         <StackPanel>
                             <TextBlock Text="World leader&#x0a;in global finance"
                                        Foreground="White"
-                                       FontSize="28"/>
+                                       FontSize="28"
+                                       FontWeight="Bold"
+                                       FontFamily="Fonts/#Dosis"/>
                             <TextBlock Text="Get strated today!"
                                        Foreground="White"
                                        FontSize="22"
-                                       Margin="0 15 0 0"/>
+                                       Margin="0 15 0 0"
+                                       FontWeight="Medium"
+                                       FontFamily="Fonts/#Dosis"/>
                         </StackPanel>
                         <Image Source="Images/manOnHomePage.png"
                                RenderOptions.BitmapScalingMode="Fant"
@@ -105,6 +109,11 @@
                             </Style>
                         </Border.Style>
                     </Border>
+
+
+                    <Grid>
+                        
+                    </Grid>
                 </Grid>
 
                 <StackPanel Grid.Column="0"
@@ -132,16 +141,20 @@
 
                     <Grid Grid.Column="1">
                         <Border Background="#844eff"
-                                                CornerRadius="20"
-                                                Margin="8 22">
+                                CornerRadius="20"
+                                Margin="8 22">
 
                         </Border>
+
+                        <Grid>
+                            
+                        </Grid>
                     </Grid>
 
                     <Grid Grid.Column="2">
                         <Border Background="#4e99ff"
-                                                CornerRadius="20"
-                                                Margin="8 22">
+                                 CornerRadius="20"
+                                Margin="8 22">
 
                         </Border>
                     </Grid>

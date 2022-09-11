@@ -22,8 +22,10 @@ namespace BankApplication.Models.ActionRecordsHistoryModel
         public string OperationDescription { get; private set; }
         public string OperationTitle { get; private set; }
         public DateTime ActionDate { get; private set; }
-      
-        [NotMapped] // cose it`s for Create 
+        public ResultStatus Status { get; private set; }
+
+
+        [NotMapped] // couse it`s for Create 
         public T Operation { get; private set; }
 
         /// <summary>
@@ -33,12 +35,13 @@ namespace BankApplication.Models.ActionRecordsHistoryModel
         /// <param name="operationDesciption"></param>
         /// <param name="account"></param>
         /// <param name="actionDate"></param>
-        public ActionHistory(T operation, string operationDesciption, Account account) // get operation code from operation class
+        public ActionHistory(T operation, string operationDesciption, Account account, string operatiomTitle = null) // get operation code from operation class
         {
             Operation = operation;
-            OperationTitle = operation.ToString();
+            OperationTitle = String.IsNullOrEmpty(operatiomTitle) ? operation.ToString() : operatiomTitle;
             OperationDescription = operationDesciption;
             Account = account;
+            Status = operation.OperationResultStatus;
             ActionDate = DateTime.Now;
         }
 

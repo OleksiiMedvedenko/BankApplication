@@ -8,14 +8,15 @@ namespace BankApplication.Models.CardsModel
         public int CardID { get; private set; }
         public virtual Client Client { get; private set; }
 
-        public int SecurityCode { get; private set; }
-        public string CardNumber { get; private set; }
+        public int CVC2Code { get; private set; }
+        public string CardNumber { get; set; }
         public int CardPINCode { get; private set; }
         public decimal AmountOfMoney { get; set; }
         public CurrencyType CardCurrencyType { get; private set; }
         public DateTime CreateCardDate { get; private set; }
+        public DateTime ExpiryCardDate { get; private set; }
         public bool IsActive { get; private set; } // card can be blocked
-
+        
 
         /// <summary>
         /// For get Card From DB
@@ -29,7 +30,7 @@ namespace BankApplication.Models.CardsModel
         public Card(int cardID, int securityCode, string cardNumber, int cardPINCode, decimal amountOfMoney, Client client, CurrencyType cardCurrencyType, DateTime createCardDate, bool isActive)
         {
             CardID = cardID;
-            SecurityCode = securityCode;
+            CVC2Code = securityCode;
             CardNumber = cardNumber;
             CardPINCode = cardPINCode;
             AmountOfMoney = amountOfMoney;
@@ -49,10 +50,9 @@ namespace BankApplication.Models.CardsModel
         /// <param name="client"></param>
         /// <param name="cardCurrencyType"></param>
         /// <param name="createCardDate"></param>
-        public Card(int cardID, int securityCode, string cardNumber, int cardPINCode, decimal amountOfMoney, Client client, CurrencyType cardCurrencyType)
+        public Card(int securityCode, string cardNumber, int cardPINCode, decimal amountOfMoney, Client client, CurrencyType cardCurrencyType)
         {
-            CardID = cardID;
-            SecurityCode = securityCode;
+            CVC2Code = securityCode;
             CardNumber = cardNumber;
             CardPINCode = cardPINCode;
             AmountOfMoney = amountOfMoney;

@@ -1,0 +1,819 @@
+﻿<UserControl x:Class="BankApplication.Views.DepositView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:BankApplication.Views"
+             mc:Ignorable="d"             
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:prism="http://prismlibrary.com/"
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+             prism:ViewModelLocator.AutoWireViewModel="True"
+             d:DesignHeight="450" d:DesignWidth="800"
+             xmlns:editors="http://schemas.syncfusion.com/wpf">
+
+    <Grid HorizontalAlignment="Stretch"
+          VerticalAlignment="Stretch">
+
+        <Border CornerRadius="30 3 6 30"
+                materialDesign:ShadowAssist.ShadowDepth="Depth3"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch">
+
+            <Border.Background>
+                <SolidColorBrush Color="#10101f"
+                                 Opacity="0.8"/>
+            </Border.Background>
+        </Border>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="0.4*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="0.5*"/>
+            </Grid.RowDefinitions>
+
+            <Border Grid.Column="1"
+                    Grid.RowSpan="3"
+                    Grid.Row="0"
+                    BorderThickness="2 0 0 0"
+                    CornerRadius="7"
+                    Margin="0 0 0 0">
+                <Border.BorderBrush>
+                    <LinearGradientBrush StartPoint="0,0.1" 
+                                                 EndPoint="1,2.3">
+                        <GradientStop Color="#34275c"
+                                          Offset="0.0"/>
+                        <GradientStop Color="#b57d05" 
+                                          Offset="0.12"/>
+                        <GradientStop Color="#34275c"
+                                          Offset="0.38"/>
+                    </LinearGradientBrush>
+                </Border.BorderBrush>
+            </Border>
+
+            <Grid Grid.Row="0"
+                  Grid.Column="0"
+                  Grid.RowSpan="2">
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.45*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Row="0"
+                      Grid.Column="1"
+                      Margin="15">
+
+                    <StackPanel Orientation="Horizontal"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center">
+
+                        <TextBlock Text="{Binding DepositRate}"
+                                   FontFamily="Fonts/#Dosis"
+                                   FontStretch="Medium"
+                                   FontWeight="Bold"
+                                   FontSize="30"
+                                   Foreground="White"/>
+
+                        <TextBlock Text=" %"
+                                   Foreground="White"
+                                   FontSize="30"
+                                   FontWeight="Bold"
+                                   FontStretch="Medium"
+                                   FontFamily="Fonts/#Dosis"/>
+                    </StackPanel>
+                </Grid>
+
+                <Grid Grid.Row="1"
+                      Grid.RowSpan="2"
+                      Grid.Column="3">
+
+                    <Grid Margin="10">
+
+                        <Border BorderThickness="3"
+                                    CornerRadius="4"
+                                    Opacity="0.45"
+                                    Panel.ZIndex="0"
+                                Margin="0 8 0 0">
+
+                            <Border.BorderBrush>
+                                <LinearGradientBrush StartPoint="0,0.1" 
+                                                 EndPoint="1,2.3">
+                                    <GradientStop Color="#262154" 
+                                                              Offset="0.0"/>
+                                    <GradientStop Color="#544121"
+                                                              Offset="0.25"/>
+                                    <GradientStop Color="#262154" 
+                                                              Offset="0.4"/>
+                                </LinearGradientBrush>
+                            </Border.BorderBrush>
+
+                            <Grid Margin="4">
+                                <ListView ItemsSource="{Binding DisplayListOfLastTransactions}"
+                                              SelectionMode="Single"
+                                              SelectedItem="{Binding SelectedTrabsaction, 
+                                                                     Mode=TwoWay,
+                                                                     UpdateSourceTrigger=PropertyChanged}"
+                                              HorizontalAlignment="Stretch"
+                                              HorizontalContentAlignment="Center"
+                                              VerticalContentAlignment="Center" 
+                                              Panel.ZIndex="2">
+                                    <ListView.View>
+                                        <GridView>
+                                            <GridViewColumn>
+                                                <HeaderedContentControl>
+                                                    <TextBlock Text="Active Deposits: "
+                                                               TextAlignment="Left"
+                                                               Width="120"
+                                                               Foreground="White"
+                                                               FontSize="15"
+                                                               FontWeight="SemiBold"
+                                                               FontFamily="Fonts/#Dosis"/>
+                                                </HeaderedContentControl>
+                                                <GridViewColumn.CellTemplate>
+                                                    <DataTemplate>
+                                                        <StackPanel>
+                                                            <TextBox Text="{Binding Path=CardNumber}"
+                                                                         FontWeight="Medium"
+                                                                         IsReadOnly="true"
+                                                                         materialDesign:TextFieldAssist.DecorationVisibility="Hidden" 
+                                                                         BorderThickness="0"
+                                                                         FontFamily="Fonts/#Dosis">
+                                                            </TextBox>
+                                                        </StackPanel>
+                                                    </DataTemplate>
+                                                </GridViewColumn.CellTemplate>
+                                            </GridViewColumn>
+                                        </GridView>
+                                    </ListView.View>
+                                </ListView>
+                            </Grid>
+                        </Border>
+                    </Grid>
+                </Grid>
+
+                <Grid Grid.Row="1"
+                      Grid.RowSpan="2"
+                      Grid.Column="0"
+                      Grid.ColumnSpan="2">
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="0.6*"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid Grid.Row="0"
+                          Margin="30 10 30 10">
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.65*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="0.65*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Border Background='LightSlateGray'
+                                Opacity="0.2"
+                                CornerRadius="6"
+                                Grid.ColumnSpan="3"
+                                Margin="8"/>
+                        
+                        <StackPanel HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    Grid.Column="0"
+                                    Margin="0 10 0 0">
+
+                            <Button Style="{StaticResource MaterialDesignFlatButton}"
+                                    Height="40"
+                                    IsEnabled="{Binding IsEnableMinusButton}">
+                                
+                                <Image Source="Images/minusMounth.png"
+                                       Width="35"
+                                       Height="35"
+                                       RenderOptions.BitmapScalingMode="Fant"
+                                       Cursor="Hand">
+
+                                    <Image.InputBindings>
+                                        <MouseBinding MouseAction="LeftClick"
+                                                      Command="{Binding ChangeMinusDepositTimePeriodMouseClick}"/>
+                                    </Image.InputBindings>
+                                    <Image.Style>
+                                        <Style TargetType="Image">
+                                            <Style.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter Property="Opacity" Value="0.65"/>
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Image.Style>
+                                </Image>
+                            </Button>
+                        </StackPanel>
+
+                        <StackPanel HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    Grid.Column="2"
+                                    Margin="0 10 0 0">
+
+                            <Button Style="{StaticResource MaterialDesignFlatButton}"
+                                    Height="40"
+                                    IsEnabled="{Binding IsEnableAddButton}">
+                                <Image Source="Images/addMounth.png"
+                                       Width="35"
+                                       Height="35"
+                                       RenderOptions.BitmapScalingMode="Fant"
+                                       Cursor="Hand">
+
+                                    <Image.InputBindings>
+                                        <MouseBinding MouseAction="LeftClick"
+                                                      Command="{Binding ChangeAddDeposiTimePeriodMouseClick}"/>
+                                    </Image.InputBindings>
+                                    <Image.Style>
+                                        <Style TargetType="Image">
+                                            <Style.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter Property="Opacity" Value="0.65"/>
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Image.Style>
+                                </Image>
+                            </Button>
+                        </StackPanel>
+
+                        <Grid Grid.Column="1"
+                              Margin="0 5 0 0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="0.9*"/>
+                                <RowDefinition Height="1.14*"/>
+                                <RowDefinition Height="0.85*"/>
+                            </Grid.RowDefinitions>
+
+                            <StackPanel HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        Grid.Row="0">
+                                <Image Source="Images/choiceDate.png"
+                                       Height="25"
+                                       Width="25"
+                                       Margin="0 10 0 0"/>
+                            </StackPanel>
+
+                            <StackPanel Grid.Row="1"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        Orientation="Horizontal"
+                                        Margin="0 0 0 0">
+                                <TextBlock Foreground="White"
+                                           FontSize="18"
+                                           Text="{Binding DepositeTimePeriod}"
+                                           FontWeight="Medium"
+                                           FontFamily="Fonts/#Dosis"/>
+
+                                <TextBlock Foreground="White"
+                                           FontSize="18"
+                                           Text=" Months"
+                                           FontWeight="Medium"
+                                           FontFamily="Fonts/#Dosis"/>
+                            </StackPanel>
+
+                            <StackPanel Grid.Row="2"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        Margin="0 -15 0 0"
+                                        Orientation="Horizontal">
+                                <TextBlock Foreground="White"
+                                           FontSize="15"
+                                           Text="Interest Rate : "
+                                           FontWeight="Regular"
+                                           FontFamily="Fonts/#Dosis"/>
+
+                                <TextBlock Foreground="White"
+                                           FontSize="15"
+                                           Text="{Binding DepositRate}"
+                                           FontWeight="Regular"
+                                           FontFamily="Fonts/#Dosis"/>
+                            </StackPanel>
+                        </Grid>
+
+                    </Grid>
+
+                    <Grid Grid.Row="1"
+                          Margin="30 10 30 10">
+                        
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.65*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="0.65*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Border Background='LightSlateGray'
+                                Opacity="0.2"
+                                CornerRadius="6"
+                                Grid.ColumnSpan="3"
+                                Margin="8"/>
+
+                        <StackPanel HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    Grid.Column="0">
+                            <Image Source="Images/interestRate.png"
+                                       Width="35"
+                                       Height="35"
+                                       RenderOptions.BitmapScalingMode="Fant">
+                            </Image>
+                        </StackPanel>
+
+                        <StackPanel Grid.Column="1"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center">
+                            <StackPanel>
+                                <TextBlock Text="Early Dissolution"
+                                           FontWeight="Medium"
+                                           FontSize="17"
+                                           Foreground="White"
+                                           FontFamily="Fonts/#Dosis"
+                                           Margin="0 10 0 0"/>
+                                
+                                <TextBlock Text="Interest will be lower"
+                                           FontWeight="Regular"
+                                           FontSize="15"
+                                           Foreground="White"
+                                           FontFamily="Fonts/#Dosis"
+                                           Opacity="0.8"/>
+                            </StackPanel>
+                        </StackPanel>
+
+                        <StackPanel HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    Grid.Column="3">
+                            <ToggleButton Height="28"
+                                          Width="40"
+                                          Command="{Binding EarlyDissolutionClickToggleButton}"
+                                          IsChecked="{Binding StatusEarlyDissolutionToggleButton,
+                                                                  Mode=TwoWay, 
+                                                                  UpdateSourceTrigger=PropertyChanged}"
+                                          IsEnabled="{Binding IsEnableEarlyDissolutionButton}"
+                                          Cursor="Hand">
+                                <Image Source="Images/EarlyDissolution.png" 
+                                        Stretch="Uniform"
+                                        Width="16"
+                                        Height="16"
+                                        RenderOptions.BitmapScalingMode="HighQuality"/>
+                            </ToggleButton>
+                        </StackPanel>
+                    </Grid>
+
+                    <Grid Grid.Row="2"
+                          Margin="30 10 30 10">
+                        <Border Background='LightSlateGray'
+                                Opacity="0.2"
+                                CornerRadius="6"
+                                Margin="8 0 8 0"/>
+
+                        <StackPanel Margin="30 4 0 4"
+                                    HorizontalAlignment="Left">
+                            <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                     Foreground="White"
+                                     FontFamily="Fonts/#Dosis"
+                                     materialDesign:HintAssist.Foreground="Teal"
+                                     materialDesign:HintAssist.Hint="Amount"
+                                     MinWidth="270"
+                                     FontWeight="SemiBold"
+                                     Text="{Binding AmountForDepositTextBoxBinding}"/>
+                        </StackPanel>
+                    </Grid>
+                </Grid>
+            </Grid>
+
+            <Grid Grid.Column="1"
+                  Grid.Row="0"
+                  Grid.RowSpan="3"
+                  Margin="0 0 0 0">
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="0.65*"/>
+                </Grid.RowDefinitions>
+                
+                <materialDesign:Card Background="{x:Null}"
+                                     Grid.Row="0"
+                                     Grid.Column="2">
+                    <Grid Margin="20">
+                        <Grid Grid.Row="0"
+                              Margin="15 0 10 -40">
+                            <materialDesign:Flipper>
+                                <materialDesign:Flipper.FrontContent>
+                                    <StackPanel Orientation="Vertical"
+                                                HorizontalAlignment="Center"
+                                                VerticalAlignment="Center">
+
+                                        <Image Source="Images/cardForeground.png"
+                                               RenderOptions.BitmapScalingMode="Fant">
+                                        </Image>
+
+                                        <Button Style="{StaticResource MaterialDesignFlatButton}"
+                                                Command="{x:Static materialDesign:Flipper.FlipCommand}"
+                                                Margin="0 0 0 30"
+                                                Width="140">
+                                            <TextBlock Text="Select Card"
+                                                       Foreground="Azure"
+                                                       FontFamily="Fonts/#Dosis"
+                                                       FontWeight="SemiBold"
+                                                       FontSize="13"/>
+                                        </Button>
+                                    </StackPanel>
+                                </materialDesign:Flipper.FrontContent>
+                                <materialDesign:Flipper.BackContent>
+
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="*"/>
+                                            <RowDefinition Height="0.3*"/>
+                                        </Grid.RowDefinitions>
+
+                                        <Grid Grid.Row="0">
+                                            <ListView ItemsSource="{Binding DisplayListOfClientCards}"
+                                                      SelectionMode="Single"
+                                                      SelectedItem="{Binding SelectedClientCardFromList, 
+                                                                            Mode=TwoWay,
+                                                                            UpdateSourceTrigger=PropertyChanged}"
+                                                      HorizontalAlignment="Stretch"
+                                                      HorizontalContentAlignment="Center"
+                                                      VerticalContentAlignment="Center"
+                                                      Panel.ZIndex="3">
+                                                <ListView.View>
+                                                    <GridView>
+                                                        <GridViewColumn>
+                                                            <HeaderedContentControl>
+                                                                <TextBlock Text="Your Cards: "
+                                                                           Foreground="White"
+                                                                           FontSize="9"
+                                                                           FontWeight="SemiBold"
+                                                                           FontFamily="Fonts/#Dosis"/>
+                                                            </HeaderedContentControl>
+                                                            <GridViewColumn.CellTemplate>
+                                                                <DataTemplate>
+                                                                    <StackPanel>
+                                                                        <TextBox Text="{Binding Path=CardNumber}"
+                                                                                 FontWeight="Medium"
+                                                                                 IsReadOnly="true"
+                                                                                 materialDesign:TextFieldAssist.DecorationVisibility="Hidden" BorderThickness="0">
+                                                                        </TextBox>
+                                                                    </StackPanel>
+                                                                </DataTemplate>
+                                                            </GridViewColumn.CellTemplate>
+                                                        </GridViewColumn>
+                                                    </GridView>
+                                                </ListView.View>
+                                            </ListView>
+                                        </Grid>
+
+                                        <Grid Grid.Row="1">
+                                            <Button Style="{StaticResource MaterialDesignFlatButton}"
+                                                    Command="{x:Static materialDesign:Flipper.FlipCommand}"
+                                                    Margin="8"
+                                                    Width="144">
+                                                <TextBlock Text="Select"
+                                                           Foreground="#0bdead"
+                                                           FontFamily="Fonts/#Dosis"
+                                                           FontWeight="SemiBold"
+                                                           FontSize="13"/>
+                                            </Button>
+                                        </Grid>
+                                    </Grid>
+                                </materialDesign:Flipper.BackContent>
+                            </materialDesign:Flipper>
+                        </Grid>
+                    </Grid>
+                </materialDesign:Card>
+
+                <Grid Grid.Row="1"
+                      Margin="20">
+                    <Border CornerRadius="15"
+                            materialDesign:ShadowAssist.ShadowDepth="Depth3"
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Stretch"
+                            Margin="0"
+                            BorderThickness="3"
+                            Grid.Row="1">
+
+                        <Border.BorderBrush>
+                            <SolidColorBrush Color="#4e63fc"
+                                             Opacity="0.3"/>
+                        </Border.BorderBrush>
+
+                        <Border.Background>
+                            <SolidColorBrush Color="White"
+                                             Opacity="0.08"/>
+                        </Border.Background>
+
+                        <Grid Margin="15">
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+
+                            <StackPanel Grid.Row="0"
+                                        Orientation="Horizontal"
+                                        Margin="0 3 0 5">
+                                <TextBlock Text="Balance : "
+                                                   FontSize="14"
+                                                   Foreground="#fcfcfc"
+                                                   FontWeight="DemiBold"
+                                                   FontFamily="Fonts/#Dosis"/>
+
+                                <TextBlock Text="{Binding MoneyOnTheCardTextBlockBinding}"
+                                                   FontSize="15"
+                                                   Foreground="#fcfcfc"
+                                                   FontWeight="DemiBold"
+                                                   FontFamily="Fonts/#Dosis"/>
+                            </StackPanel>
+
+                            <StackPanel Grid.Row="1"
+                                        Orientation="Horizontal"
+                                        Margin="0 3 0 0">
+                                <TextBlock Text="Currency : "
+                                                   FontSize="14"
+                                                   Foreground="#fcfcfc"
+                                                   FontWeight="DemiBold"
+                                                   FontFamily="Fonts/#Dosis"/>
+
+                                <TextBlock Text="{Binding CurrencyCardTextBlockBinding}"
+                                                   FontSize="15"
+                                                   Foreground="#fcfcfc"
+                                                   FontWeight="DemiBold"
+                                                   FontFamily="Fonts/#Dosis"/>
+                            </StackPanel>
+
+                            <StackPanel Grid.Row="2"
+                                        Orientation="Horizontal"
+                                        Margin="0 3 0 0">
+                                <TextBlock Text="Open Deposits : "
+                                                   FontSize="14"
+                                                   Foreground="#fcfcfc"
+                                                   FontWeight="DemiBold"
+                                                   FontFamily="Fonts/#Dosis"/>
+
+                                <TextBlock Text="{Binding OpenDepositsOnCardTextBlockBinding}"
+                                                   FontSize="15"
+                                                   Foreground="#fcfcfc"
+                                                   FontWeight="DemiBold"
+                                                   FontFamily="Fonts/#Dosis"/>
+                            </StackPanel>
+                        </Grid>
+                    </Border>
+                </Grid>
+
+            </Grid>
+            
+            
+            <Grid Grid.Column="0"
+                  Grid.Row="2"
+                  Margin="20 0 0 0">
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid Grid.Column="0"
+                          Margin="20 5 20 10">
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="0.3*"/>
+                        </Grid.RowDefinitions>
+
+                        <Grid Grid.Row="0">
+
+
+                            <StackPanel HorizontalAlignment="Center"
+                                        VerticalAlignment="Center">
+                                <Button Height="50"
+                                        Width="54"
+                                        materialDesign:ButtonAssist.CornerRadius="6"
+                                        materialDesign:ShadowAssist.ShadowDepth="Depth3"
+                                        Command="{Binding Command}"
+                                        BorderBrush="OrangeRed">
+
+                                    <Image Source="Images/deposit.png"
+                                           RenderOptions.BitmapScalingMode="Fant"
+                                           Height="45"
+                                           Width="45"
+                                           HorizontalAlignment="Center"
+                                           VerticalAlignment="Center"
+                                           Margin="-20">
+                                        
+                                    </Image>
+                                    <Button.Style>
+                                        <Style TargetType="Button"
+                                               BasedOn="{StaticResource MaterialDesignFlatMidBgButton}">
+                                            <Style.Triggers>
+                                                <Trigger Property="IsPressed" Value="True">
+                                                    <Setter Property="Background" Value="#48f542"/>
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Button.Style>
+                                </Button>
+                            </StackPanel>
+                        </Grid>
+
+                        <Grid Grid.Row="1">
+                            <TextBlock Text="Open Deposit"
+                                       FontFamily="Fonts/#Dosis"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       FontSize="12"
+                                       Foreground="White"
+                                       FontWeight="Medium"/>
+                        </Grid>
+                    </Grid>
+
+                    <Grid Grid.Column="1"
+                          Margin="20 5 20 10">
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="0.3*"/>
+                        </Grid.RowDefinitions>
+
+                        <Grid Grid.Row="0">
+
+
+
+                            <StackPanel HorizontalAlignment="Center"
+                                        VerticalAlignment="Center">
+                                <Button Height="50"
+                                        Width="54"
+                                        materialDesign:ButtonAssist.CornerRadius="6"
+                                        materialDesign:ShadowAssist.ShadowDepth="Depth3"
+                                        Command="{Binding Command}"
+                                        BorderBrush="OrangeRed">
+
+                                    <Image Source="Images/CloseDeposit.png"
+                                           RenderOptions.BitmapScalingMode="Fant"
+                                           Height="45"
+                                           Width="45"
+                                           HorizontalAlignment="Center"
+                                           VerticalAlignment="Center"
+                                           Margin="-20">
+
+                                    </Image>
+                                    <Button.Style>
+                                        <Style TargetType="Button"
+                                               BasedOn="{StaticResource MaterialDesignFlatMidBgButton}">
+                                            <Style.Triggers>
+                                                <Trigger Property="IsPressed" Value="True">
+                                                    <Setter Property="Background" Value="#48f542"/>
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Button.Style>
+                                </Button>
+                            </StackPanel>
+                        </Grid>
+
+                        <Grid Grid.Row="1">
+                            <TextBlock Text="Close Deposit"
+                                       FontFamily="Fonts/#Dosis"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       FontSize="12"
+                                       Foreground="White"
+                                       FontWeight="Medium"/>
+                        </Grid>
+                    </Grid>
+
+                    <Grid Grid.Column="2"
+                          Margin="20 5 20 10">
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="0.3*"/>
+                        </Grid.RowDefinitions>
+
+                        <Grid Grid.Row="0">
+
+                            <StackPanel HorizontalAlignment="Center"
+                                        VerticalAlignment="Center">
+
+                                <Button Height="50"
+                                        Width="54"
+                                        materialDesign:ButtonAssist.CornerRadius="6"
+                                        materialDesign:ShadowAssist.ShadowDepth="Depth3"
+                                        Command="{Binding Command}"
+                                        BorderBrush="OrangeRed">
+
+                                    <Image Source="Images/deteils.png"
+                                           RenderOptions.BitmapScalingMode="Fant"
+                                           Height="45"
+                                           Width="45"
+                                           HorizontalAlignment="Center"
+                                           VerticalAlignment="Center"
+                                           Margin="-20">
+
+                                    </Image>
+                                    <Button.Style>
+                                        <Style TargetType="Button"
+                                               BasedOn="{StaticResource MaterialDesignFlatMidBgButton}">
+                                            <Style.Triggers>
+                                                <Trigger Property="IsPressed" Value="True">
+                                                    <Setter Property="Background" Value="#48f542"/>
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Button.Style>
+                                </Button>
+                            </StackPanel>
+                        </Grid>
+
+                        <Grid Grid.Row="1">
+                            <TextBlock Text="Details"
+                                       FontFamily="Fonts/#Dosis"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       FontSize="12"
+                                       Foreground="White"
+                                       FontWeight="Medium"/>
+                        </Grid>
+                    </Grid>
+
+
+                    <Grid Grid.Column="3"
+                          Margin="20 5 20 10">
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="0.30*"/>
+                        </Grid.RowDefinitions>
+
+                        <Grid Grid.Row="0">
+
+                            <StackPanel HorizontalAlignment="Center"
+                                        VerticalAlignment="Center">
+                                <Button Height="50"
+                                        Width="54"
+                                        materialDesign:ButtonAssist.CornerRadius="6"
+                                        materialDesign:ShadowAssist.ShadowDepth="Depth3"
+                                        Command="{Binding Command}"
+                                        BorderBrush="OrangeRed">
+
+                                    <Image Source="Images/depositHistory.png"
+                                           RenderOptions.BitmapScalingMode="Fant"
+                                           Height="45"
+                                           Width="45"
+                                           HorizontalAlignment="Center"
+                                           VerticalAlignment="Center"
+                                           Margin="-20">
+
+                                    </Image>
+                                    <Button.Style>
+                                        <Style TargetType="Button"
+                                               BasedOn="{StaticResource MaterialDesignFlatMidBgButton}">
+                                            <Style.Triggers>
+                                                <Trigger Property="IsPressed" Value="True">
+                                                    <Setter Property="Background" Value="#48f542"/>
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Button.Style>
+                                </Button>
+                            </StackPanel>
+                        </Grid>
+
+                        <Grid Grid.Row="1">
+                            <TextBlock Text="History"
+                                       FontFamily="Fonts/#Dosis"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       FontSize="12"
+                                       Foreground="White"
+                                       FontWeight="Medium"/>
+                        </Grid>
+                    </Grid>
+
+                </Grid>
+            </Grid>
+        </Grid>
+
+    </Grid>
+
+</UserControl>

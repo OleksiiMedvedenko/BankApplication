@@ -23,6 +23,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SQL", "SQL", "{C962488E-D41
 		SqlExpressions.txt = SqlExpressions.txt
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DatabaseTools", "DatabaseTools\DatabaseTools.csproj", "{0C978DB5-DFD0-4AD0-A8FB-9263BDEB4B8F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -49,6 +51,10 @@ Global
 		{E6B3E7D3-DC10-4AED-840E-55A8E019366D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E6B3E7D3-DC10-4AED-840E-55A8E019366D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E6B3E7D3-DC10-4AED-840E-55A8E019366D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0C978DB5-DFD0-4AD0-A8FB-9263BDEB4B8F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0C978DB5-DFD0-4AD0-A8FB-9263BDEB4B8F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0C978DB5-DFD0-4AD0-A8FB-9263BDEB4B8F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0C978DB5-DFD0-4AD0-A8FB-9263BDEB4B8F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

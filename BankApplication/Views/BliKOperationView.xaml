@@ -56,6 +56,45 @@
 
         </Border>
 
+        <Grid Grid.Column="2"
+              Grid.Row="0"
+              Grid.RowSpan="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="3">
+                <StackPanel HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Margin="0 -4 0 0">
+                    <Button materialDesign:ShadowAssist.ShadowDepth="Depth3"
+                                    materialDesign:ButtonAssist.CornerRadius="5"
+                                    Command="{Binding CopyBLIKCodeButtonClickCommand}">
+                        <StackPanel Orientation="Horizontal">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Copy"
+                                               FontFamily="Fonts/#Dosis"
+                                               HorizontalAlignment="Left"
+                                               VerticalAlignment="Center"
+                                               Margin="14 0 0 0"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="Images/copy.png"
+                                           RenderOptions.BitmapScalingMode="Fant"
+                                           HorizontalAlignment="Right"
+                                           Margin="10 0 0 0"
+                                       Height="20"/>
+                            </StackPanel>
+                        </StackPanel>
+
+                    </Button>
+                </StackPanel>
+            </Grid>
+        </Grid>
+
         <Grid Grid.Row="0"
               Grid.Column="1"
               Visibility="{Binding BlikCircleVisibility,
@@ -71,7 +110,7 @@
 
             <StackPanel HorizontalAlignment="Center"
                         VerticalAlignment="Center">
-                <TextBlock Text="5211"
+                <TextBlock Text="{Binding BliKCodeTextBox}"
                            Foreground="#f2f29b"
                            FontWeight="SemiBold"
                            FontSize="26"
@@ -81,18 +120,18 @@
 
         <Grid Grid.Column="1"
               Grid.Row="1"
-              Margin="8">
+              Margin="30 8 30 8">
             <Button VerticalAlignment="Center"
                     Command="{Binding GetBliKCodeButtonClickCommand}"
                     materialDesign:ButtonAssist.CornerRadius="8"
-                    Height="38"
+                    Height="33"
                     IsEnabled="{Binding GetBlikCodeButtonEnabled,
                                         Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                 <TextBlock Text="Get BliK"
                            Foreground="#f5f578"
                            FontFamily="Fonts/#Dosis"
                            FontWeight="SemiBold"
-                           FontSize="19">
+                           FontSize="17">
 
                 </TextBlock>
             </Button>

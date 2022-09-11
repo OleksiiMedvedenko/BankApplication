@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 using System.Windows.Threading;
 using static System.Net.Mime.MediaTypeNames;
@@ -14,15 +15,35 @@ namespace BankApplication.ViewModels
 {
     public class BliKOperationViewModel : BindableBase, IBliKOperationViewModel
     {
+
+        // ***Comands*** \\
+        #region
         public ICommand GetBliKCodeButtonClickCommand { get; set; }
+        public ICommand CopyBLIKCodeButtonClickCommand { get; set; }
+        #endregion
 
         public BliKOperationViewModel()
         {
-            GetBliKCodeButtonClickCommand = new DelegateCommand(GetBliKCodeButton);
+            GetBliKCodeButtonClickCommand = new DelegateCommand(GetBliKCode);
+            CopyBLIKCodeButtonClickCommand = new DelegateCommand(CopyBLIKCode);
 
             BlikCircleVisibility = false;
             GetBlikCodeButtonEnabled = true;
         }
+
+        // ***Binding fields*** \\
+        #region
+        private string _bliKCodeTextBox;
+        public string BliKCodeTextBox
+        {
+            get { return _bliKCodeTextBox; }
+            set 
+            { 
+                _bliKCodeTextBox = value;
+                RaisePropertyChanged();
+            }
+        }
+
 
         private bool _getBlikCodeButtonEnabled;
         public bool GetBlikCodeButtonEnabled
@@ -58,17 +79,28 @@ namespace BankApplication.ViewModels
                 RaisePropertyChanged();
             }
         }
+        #endregion
 
-
-        private void GetBliKCodeButton()
+        private void CopyBLIKCode()
         {
+            Clipboard.SetData(DataFormats.Text, BliKCodeTextBox);
+        }
+
+        private void GetBliKCode()
+        {
+            GenerateBlikCode();
+
             BlikCircleVisibility = true;
             GetBlikCodeButtonEnabled = false;
-            Countdown(15, TimeSpan.FromSeconds(1), cur => AnimationOFCircleForBliKView = cur.ToString());
+            Countdown(10, TimeSpan.FromSeconds(1), cur => AnimationOFCircleForBliKView = cur.ToString());
         }
 
 
-        void Countdown(int count, TimeSpan interval, Action<int> ts)
+        private void GenerateBlikCode()
+        {
+            BliKCodeTextBox = new Random().Next(0000, 9999).ToString();
+        }
+        private void Countdown(int count, TimeSpan interval, Action<int> ts)
         {
             var dt = new System.Windows.Threading.DispatcherTimer();
             dt.Interval = interval;

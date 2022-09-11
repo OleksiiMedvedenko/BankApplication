@@ -7,27 +7,61 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Views\Fonts\Dosis.ttf" />
+    <None Remove="Views\Images\actionHistoryDescription.png" />
+    <None Remove="Views\Images\addMounth.png" />
     <None Remove="Views\Images\background.jpg" />
     <None Remove="Views\Images\backGroundNew.jpg" />
     <None Remove="Views\Images\background_1.jpg" />
     <None Remove="Views\Images\bank.png" />
-    <None Remove="Views\Images\bk.png" />
     <None Remove="Views\Images\blik.png" />
     <None Remove="Views\Images\CardBackground.png" />
     <None Remove="Views\Images\CardForeground.png" />
+    <None Remove="Views\Images\cardForStatistics.png" />
+    <None Remove="Views\Images\Cardlimit.png" />
     <None Remove="Views\Images\cards.png" />
+    <None Remove="Views\Images\changeCard.png" />
+    <None Remove="Views\Images\choiceDate.png" />
+    <None Remove="Views\Images\close.png" />
+    <None Remove="Views\Images\CloseDeposit.png" />
+    <None Remove="Views\Images\copy.png" />
+    <None Remove="Views\Images\cvvImage.png" />
+    <None Remove="Views\Images\deposit.png" />
+    <None Remove="Views\Images\depositForHomePage.png" />
+    <None Remove="Views\Images\depositHistory.png" />
+    <None Remove="Views\Images\deteils.png" />
+    <None Remove="Views\Images\EarlyDissolution.png" />
+    <None Remove="Views\Images\expense.png" />
     <None Remove="Views\Images\hide.png" />
     <None Remove="Views\Images\history.png" />
+    <None Remove="Views\Images\historyTransaction.png" />
     <None Remove="Views\Images\homeBackground.jpg" />
+    <None Remove="Views\Images\interestRate.png" />
     <None Remove="Views\Images\Left.png" />
     <None Remove="Views\Images\manOnHomePage.png" />
+    <None Remove="Views\Images\manUserDontHaveIcon.png" />
+    <None Remove="Views\Images\minusMounth.png" />
+    <None Remove="Views\Images\PINImage.png" />
+    <None Remove="Views\Images\receipts.png" />
     <None Remove="Views\Images\Right.png" />
     <None Remove="Views\Images\SearchIcon.png" />
+    <None Remove="Views\Images\sendTransaction.png" />
     <None Remove="Views\Images\Settings.png" />
+    <None Remove="Views\Images\support.png" />
     <None Remove="Views\Images\UserIcon.png" />
+    <None Remove="Views\Images\usersForHomePage.png" />
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Views\Fonts\Dosis.ttf">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Views\Images\actionHistoryDescription.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Views\Images\addMounth.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Views\Images\background.jpg">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
@@ -40,9 +74,6 @@
     <Resource Include="Views\Images\bank.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Views\Images\bk.png">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
     <Resource Include="Views\Images\blik.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
@@ -52,6 +83,12 @@
     <Resource Include="Views\Images\CardForeground.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Views\Images\cardForStatistics.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Views\Images\Cardlimit.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Views\Images\cards.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
@@ -59,7 +96,7 @@
 
   <ItemGroup>
     <PackageReference Include="EntityFramework" Version="6.4.4" />
-    <PackageReference Include="MaterialDesignThemes" Version="4.5.0" />
+    <PackageReference Include="MaterialDesignThemes" Version="4.6.0-ci277" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.17">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -73,24 +110,66 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Wraping\" />
     <Folder Include="Services\Interface\" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\DatabaseTools\DatabaseTools.csproj" />
     <ProjectReference Include="..\LoginForm\LoginForm.csproj" />
     <ProjectReference Include="..\MessageBoxWidget\MessageBoxWidget.csproj" />
     <ProjectReference Include="..\Tools\Tools\Tools.csproj" />
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Views\Images\changeCard.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Views\Images\choiceDate.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Views\Images\close.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Views\Images\CloseDeposit.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Views\Images\copy.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Views\Images\cvvImage.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Views\Images\deposit.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Views\Images\depositForHomePage.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Views\Images\depositHistory.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Views\Images\deteils.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Views\Images\EarlyDissolution.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Views\Images\expense.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Views\Images\hide.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Views\Images\history.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Views\Images\historyTransaction.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Views\Images\homeBackground.jpg">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Views\Images\interestRate.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Views\Images\Left.png">
@@ -99,16 +178,37 @@
     <Resource Include="Views\Images\manOnHomePage.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Views\Images\manUserDontHaveIcon.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Views\Images\minusMounth.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Views\Images\PINImage.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Views\Images\receipts.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Views\Images\Right.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Views\Images\SearchIcon.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Views\Images\sendTransaction.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Views\Images\Settings.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Views\Images\support.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Views\Images\UserIcon.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Views\Images\usersForHomePage.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>

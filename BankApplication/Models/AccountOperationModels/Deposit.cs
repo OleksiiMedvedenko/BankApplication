@@ -15,15 +15,15 @@ namespace BankApplication.Models.AccountOperationModels
         public int DepositID { get; private set; }
         public OperationType OperationType { get; set; }
         public virtual Account DepositAccount { get; set; }
-        private decimal AmountUnderRate { get; set; }
-        private TimeSpan TimePeriod { get; set; } // время на которое клиет кладёт сумму на дипозит 
+        public decimal OperationAmount { get; set; }
+        public TimeSpan TimePeriod { get; set; } // время на которое клиет кладёт сумму на дипозит 
         public DateTime DepositOperationStartDate { get; private set; }
         public DateTime DepositOperationEndDate { get; private set; }
-        public string OperationCode { get; private set; }
+        public string OperationCode { get; set; }
         public decimal InterestRate { get; set; }
         public string CardNumber { get; private set; }
 
-        public OperationResult operationResult { get; set; }
+        public ResultStatus OperationResultStatus { get; set; }
 
         /// <summary>
         /// For Create Deposit
@@ -32,15 +32,15 @@ namespace BankApplication.Models.AccountOperationModels
         /// <param name="amount"></param>
         /// <param name="timePeriod"></param>
         /// <param name="cardNumber"></param>
-        public Deposit(Account account, decimal amount, string cardNumber, DateTime depositOperationEndDate)
+        public Deposit(Account account, decimal amount, string cardNumber, DateTime depositOperationEndDate, decimal interestRate)
         {
             DepositAccount = account;
-            AmountUnderRate = amount;
+            OperationAmount = amount;
             CardNumber = cardNumber;
             DepositOperationStartDate = DateTime.Now;
             DepositOperationEndDate = depositOperationEndDate;
             OperationCode = Guid.NewGuid().ToString().Substring(0, 12);
-
+            InterestRate = interestRate;
             TimePeriod = DepositOperationEndDate.Subtract(DepositOperationStartDate);
         }
 
@@ -50,7 +50,7 @@ namespace BankApplication.Models.AccountOperationModels
         public Deposit(Account account, decimal amount, string cardNumber, DateTime startDepositDate, DateTime endDepositDate, string operationCode)
         {
             DepositAccount = account;
-            AmountUnderRate = amount;
+            OperationAmount = amount;
             CardNumber = cardNumber;
             DepositOperationStartDate = startDepositDate;
             DepositOperationEndDate = endDepositDate;
@@ -65,14 +65,14 @@ namespace BankApplication.Models.AccountOperationModels
 
             var time = ReturnTimeSpan(ConvertTimeSpan(), ref divisionPercentage);
 
-            DepositAccount.Client.Cards.SingleOrDefault(x => x.CardNumber == $"{CardNumber}").AmountOfMoney -= AmountUnderRate;
+            DepositAccount.Client.Cards.SingleOrDefault(x => x.CardNumber == $"{CardNumber}").AmountOfMoney -= OperationAmount;
 
             for (int i = 1; i <= time; i++)
             {
-                AmountUnderRate = AmountUnderRate + AmountUnderRate * RateOptions(AmountUnderRate) / divisionPercentage;
+                OperationAmount = OperationAmount + OperationAmount * RateOptions(OperationAmount) / divisionPercentage;
             }
             
-            return AmountUnderRate;
+            return OperationAmount;
         }
 
         private TimeSpan ConvertTimeSpan()
@@ -109,7 +109,7 @@ namespace BankApplication.Models.AccountOperationModels
 
         public void ReturnAmountWithInterest()
         {
-            DepositAccount.Client.Cards.SingleOrDefault(x => x.CardNumber == $"{CardNumber}").AmountOfMoney += AmountUnderRate;
+            DepositAccount.Client.Cards.SingleOrDefault(x => x.CardNumber == $"{CardNumber}").AmountOfMoney += OperationAmount;
         }
 
         private decimal RateOptions(decimal amount)

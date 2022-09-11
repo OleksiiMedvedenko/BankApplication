@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace BankApplication.Models.AccountOperationModels.OperationResultStatus
 {
-    public enum OperationResult
+    public enum ResultStatus
     {
-        Income,
-        Lesion
+        TransactionStatus = 0,
+        Income = 5,
+        Lesion = 7
     }
 }

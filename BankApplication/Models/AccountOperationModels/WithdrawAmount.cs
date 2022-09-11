@@ -10,15 +10,15 @@ using System.Threading.Tasks;
 
 namespace BankApplication.Models.AccountOperationModels
 {
-    public class WithdrawAmmountFromAccount : IOperation
+    public class WithdrawAmount : IOperation
     {
         public int WithdrawAmmountFromAccountID { get; private set; }
         public OperationType OperationType { get; set; }
         public virtual Account Account { get; private set; }
-        public decimal Amount { get; private set; }
-        public string OperationCode { get; private set; }
+        public decimal OperationAmount { get; set; }
+        public string OperationCode { get; set; }
         public DateTime WithdrawOperationDate { get; private set; }
-        public OperationResult operationResult { get; set; }
+        public ResultStatus OperationResultStatus { get; set; }
         public string CardNumber { get; private set; }
 
         /// <summary>
@@ -26,17 +26,19 @@ namespace BankApplication.Models.AccountOperationModels
         /// </summary>
         /// <param name="account"></param>
         /// <param name="amount"></param>
-        public WithdrawAmmountFromAccount(Account account, decimal amount)
+        public WithdrawAmount(Account account, decimal amount)
         {
             Account = account;
-            Amount = amount;
+            OperationAmount = amount;
             OperationCode = Guid.NewGuid().ToString().Substring(0, 12);
             WithdrawOperationDate = DateTime.Now;
+
+            OperationResultStatus = ResultStatus.Lesion;
         }
 
         public void WithdrawAmountExecution(string cardNumber)
         {
-            Account.Client.Cards.SingleOrDefault(x => x.CardNumber == $"{cardNumber}").AmountOfMoney -= Amount;
+            Account.Client.Cards.SingleOrDefault(x => x.CardNumber == $"{cardNumber}").AmountOfMoney -= OperationAmount;
         }
 
         public override string ToString()

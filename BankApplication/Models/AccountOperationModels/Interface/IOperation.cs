@@ -12,6 +12,9 @@ namespace BankApplication.Models.AccountOperationModels.Interface
     public interface IOperation
     {
         OperationType OperationType { get; set; }
-        OperationResult operationResult { get; set; }
+        ResultStatus OperationResultStatus { get; set; }
+
+        string OperationCode { get; set; }
+        decimal OperationAmount { get; set; }
     }
 }

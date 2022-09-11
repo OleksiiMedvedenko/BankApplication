@@ -10,3 +10,54 @@ add-migration
 
 update-database.
 
+
+Block operation if card dhave another Currency Type
+
+
+when Click on history = > display details and show button print 
+
+Chage in account Settings = > editable account login and account password (=> when user is loging in account)
+
+
+Add allows in online payments ? in db create bool column yes/NO
+
+
+add to database to table "OperationTypes" column "ResultStatus" with reference key to TABLE "OperationResultStatus" => delete field in models OperationResultStatus
+
+add to database ExpiryCardDate column = > dateTime 
+
+comboBox? in action records history with select => 1.select of one operation Type 
+												   2.select of one resilt status
+												   3.select all incoming operations 
+												   4.select all lession operations
+
+add Selection card in historyView
+
+
+if client search card anouther cient by phone number => and second cient have more one card => comboBox with List<Card> and show number and Currency 
+
+
+CREATE NEW TABLE ClientPersonalInfromation 
+
+        string PassportNumber { get; private set; }
+        DateTime RegistrationDate { get; private set; }
+        Guid ClientUniqueNumber { get; private set; }
+        byte?[] UserImage { get; private set; }
+		byte[] PassportImage { get; private set; }
+
+
+		AND DELETE THIS COLUMNS IN CLIENT table
+
+
+
+
+
+FUTURE: 
+WHEN client create account => field "IsActive" in table Client and Account set 0! = > and admin check all client info and confirm !
+
+
+ADD TO TABLE CARD SECRETWORD COLUMN 
+
+ADD TO Client TABLE SEX COLUMN
+
+CREATE TABLE Countries where your bank is working

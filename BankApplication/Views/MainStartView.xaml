@@ -29,9 +29,11 @@
                     <Grid>
                         <Label Content="{TemplateBinding Content}"
                                Background="Transparent"
-                               FontSize="15" 
+                               FontSize="16" 
                                VerticalAlignment="Center"
-                               Cursor="Hand">
+                               Cursor="Hand"
+                               FontFamily="Fonts/#Dosis"
+                               FontWeight="SemiBold">
                             <Label.Style>
                                 <Style TargetType="Label">
                                     <Setter Property="Foreground" 
@@ -66,7 +68,8 @@
                                VerticalAlignment="Center"
                                FontSize="15"
                                FontWeight="SemiBold" 
-                               Opacity="0.2">
+                               Opacity="0.2"
+                               FontFamily="Fonts/#Dosis">
                             <Label.Style>
                                 <Style TargetType="Label">
                                     <Setter Property="Foreground" Value="white"/>
@@ -139,7 +142,9 @@
                                Margin="15 -15 0 0"
                                Background="Transparent" 
                                FontSize="14" 
-                               VerticalAlignment="Center">
+                               VerticalAlignment="Center"
+                               FontFamily="Fonts/#Dosis"
+                               FontWeight="SemiBold">
                             <Label.Style>
                                 <Style TargetType="Label">
                                     <Setter Property="Foreground" 
@@ -327,7 +332,24 @@
                                            TextAlignment="Center"
                                            FontSize="14.5"
                                            Margin="5 7 4 4"
-                                           FontWeight="Medium">
+                                           FontWeight="Medium"
+                                           Cursor="Hand">
+
+                                    <TextBlock.Style>
+                                        <Style TargetType="TextBlock">
+                                            <Style.Triggers>
+                                                <Trigger Property="IsMouseOver" Value='True'>
+                                                    <Setter Property="Opacity" Value="0.9"/>
+                                                    <Setter Property="Margin" Value="5 5 0 0"/>
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </TextBlock.Style>
+                                    
+                                    <TextBlock.InputBindings>
+                                        <MouseBinding MouseAction="LeftClick"
+                                                      Command="{Binding OpenTopMenuHomeViewButtonCommandClick}"/>
+                                    </TextBlock.InputBindings>
                                     <TextBlock.Foreground>
                                         <LinearGradientBrush StartPoint="0,0"
                                                              EndPoint="1,2">
@@ -362,18 +384,42 @@
                                         Content="Home"
                                         Command="{Binding OpenTopMenuHomeViewButtonCommandClick}"/>
                                 <Button Template="{StaticResource ResourceKey=TopMenuButtons}" 
-                                        Content="Account"
-                                        Command="{Binding OpenAccountView}"/>
+                                        Content="Profile"
+                                        Command="{Binding OpenTopMenuAccountViewButtonCommandClick}"/>
                                 <Button Template="{StaticResource ResourceKey=TopMenuButtons}" 
-                                        Content="Transaction"
-                                        Command="{Binding OpenTransactionView}"/>
+                                        Content="Send Money"
+                                        Command="{Binding OpenTopMenuTransactionViewButtonClickCommand}"/>
                                 <Button Template="{StaticResource ResourceKey=TopMenuButtons}" 
                                         Content="Deposit"
-                                        Command="{Binding OpenDepositView}"/>
+                                        Command="{Binding OpenTopMenuDepositViewButtonCommandClick}"/>
                                 <Button Template="{StaticResource ResourceKey=TopMenuButtons}" 
                                         Content="Credit"
                                         Command="{Binding OpenCreditView}"/>
+                            </StackPanel>
 
+                            <StackPanel HorizontalAlignment="Right"
+                                        VerticalAlignment="Top">
+
+                                <Image Source="Images/close.png"
+                                       RenderOptions.BitmapScalingMode="Fant"
+                                       Margin="6"
+                                       Height="25"
+                                       Cursor="Hand">
+
+                                    <Image.InputBindings>
+                                        <MouseBinding MouseAction="LeftClick"
+                                                      Command="{Binding CloseApplicationCommand}"/>
+                                    </Image.InputBindings>
+                                    <Image.Style>
+                                        <Style TargetType="Image">
+                                            <Style.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter Property="Opacity" Value="0.75"/>
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Image.Style>
+                                </Image>
                             </StackPanel>
                         </Grid>
                     </Grid>
@@ -510,14 +556,16 @@
 
                                     <Button Template="{StaticResource ResourceKey=SlideMenuBtn}" 
                                             Command="{Binding OpenSettingsViewButtonCommandClick}"
-                                            Content="Settings"
+                                            Content="Support"
                                             Margin="0 10 0 0">
                                         <Button.Resources>
-                                            <ImageSource x:Key="Img">Images\Settings.png</ImageSource>
+                                            <ImageSource x:Key="Img">Images\support.png</ImageSource>
                                         </Button.Resources>
                                     </Button>
 
                                 </StackPanel>
+
+                                
 
                                 <ToggleButton Focusable="False" 
                                       x:Name="OpenCloseSlideMenuBtn" 
