@@ -1,20 +1,7 @@
 Check operationCode Wen SaveIM INTO DB, UNIQUE !!!!!!!!
 
-Create unique cardNumber automaticly and SecurityCode 
-
-
-
-enable-migrations
-
-add-migration
-
-update-database.
-
-
 Block operation if card dhave another Currency Type
 
-
-when Click on history = > display details and show button print 
 
 Chage in account Settings = > editable account login and account password (=> when user is loging in account)
 
@@ -56,8 +43,14 @@ FUTURE:
 WHEN client create account => field "IsActive" in table Client and Account set 0! = > and admin check all client info and confirm !
 
 
-ADD TO TABLE CARD SECRETWORD COLUMN 
+ADD TO TABLE Account SECRETWORD COLUMN 
 
-ADD TO Client TABLE SEX COLUMN
+ADD TO TABLE CARD Expire date COLUMN 
+
+ADD TO Client TABLE gender COLUMN
 
 CREATE TABLE Countries where your bank is working
+
+CREATE BUTTON IN VIEW FOR CHANGE PASSPORT IMAGE AND PASSPORT NUMBER => ADMIN CONFIRM NEW PHOTO PASSPORT AND PASS NUMBER !
+
+PERMISSION DOSTUP FOR ADMIN BY LOGIN 

@@ -1,0 +1,42 @@
+﻿<Window x:Class="SupportChatApplication.Views.MainChatView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SupportChatApplication.Views"
+        mc:Ignorable="d"
+        Title="MainChatView" Height="450" Width="800"
+        xmlns:prism="http://prismlibrary.com/"
+        prism:ViewModelLocator.AutoWireViewModel="True">
+
+    <Grid HorizontalAlignment="Stretch"
+          VerticalAlignment="Stretch">
+
+        <Border CornerRadius="30 3 6 30"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch">
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.1*"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Row="0">
+                    <StackPanel>
+                        <Button Command="{Binding OpenRegion}"
+                                    Background="Aqua"
+                                    Height="30">
+
+                        </Button>
+                    </StackPanel>
+                </Grid>
+
+                <Grid Margin="0 0 0 0"
+                      Grid.Row="1">
+                    <ContentControl prism:RegionManager.RegionName="MainRegion"/>
+                </Grid>
+            </Grid>
+        </Border>
+    </Grid>
+</Window>

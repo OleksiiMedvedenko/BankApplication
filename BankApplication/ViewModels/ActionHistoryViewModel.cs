@@ -3,7 +3,6 @@ using BankApplication.Models.AccountOperationModels.Interface;
 using BankApplication.Models.ActionRecordsHistoryModel;
 using BankApplication.Models.PersonModel;
 using BankApplication.ViewModels.Interface;
-using PrehPL.Tools.Extensions;
 using Prism.Mvvm;
 using System;
 using System.Collections.Generic;
@@ -20,15 +19,15 @@ namespace BankApplication.ViewModels
     {
         public ActionHistoryViewModel()
         {
-            var client = new Client(1, "test", "test", "test@gmail.com", "123456", "FZ123", new byte[3]);
-            var client2 = new Client(2, "test2", "test2", "test2@gmail.com", "521631", "FZ6231", new byte[3]);
-            var account = new Models.AccountModel.Account(1, "test", "test", client);
-            var account2 = new Models.AccountModel.Account(2, "test2", "test2", client2);
+            var client = new Client(1, "test", "test", "test@gmail.com", "123456", "FZ123", Gender.Man, new byte[3]);
+            var client2 = new Client(2, "test2", "test2", "test2@gmail.com", "521631", "FZ6231", Gender.Man, new byte[3]);
+            var account = new Models.AccountModel.Account(1, "test", "test", client, "123");
+            var account2 = new Models.AccountModel.Account(2, "test2", "test2", client2, "1234");
             var operation = new AddingAmount(account, 200);
             var operation2 = new WithdrawAmount(account, 100);
             var operation3 = new Transaction(account, account2, 10);
 
-            ListOfCardOperationHistory = new ObservableCollectionPropertyNotify<ActionHistory<IOperation>>
+            ListOfCardOperationHistory = new ObservableCollection<ActionHistory<IOperation>>
             {
                 new ActionHistory<IOperation>(operation, "Test description", account),
                 new ActionHistory<IOperation>(operation2, "Test description2", account, "Title"),

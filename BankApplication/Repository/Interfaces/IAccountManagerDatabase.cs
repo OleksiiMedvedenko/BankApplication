@@ -16,6 +16,6 @@ namespace BankApplication.Repository.Interfaces
         DatabaseQueryResult<bool> DeactivateAccount(Account account);
 
         DatabaseQueryResult<Account> GetAccount(string login, string password);
-        DatabaseQueryResult<ObservableCollection<Account>> GetAccounts();
+        DatabaseQueryResult<ObservableCollection<Account>> GetActiveAccounts();
     }
 }

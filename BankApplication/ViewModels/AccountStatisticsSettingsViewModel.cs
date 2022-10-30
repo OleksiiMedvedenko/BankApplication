@@ -23,13 +23,13 @@ namespace BankApplication.ViewModels
 
         public AccountStatisticsSettingsViewModel()
         {
-            var client = new Client(1, "test", "test", "test@gmail.com", "123456", "FZ123", new byte[3]);
+            var client = new Client(1, "test", "test", "test@gmail.com", "123456", "FZ123", Gender.Man, new byte[3]);
 
-            DisplayAllClientCards = new ObservableCollection<Card>()
-            {
-                new Card(321, "5124-5234-6731-7313", 0512, 235, client, CurrencyType.EUR),
-                new Card(323, "2351-6342-6342-9074", 5125, 9321, client, CurrencyType.PLN),
-            };
+            //DisplayAllClientCards = new ObservableCollection<Card>()
+            //{
+            //    new Card(321, "5124-5234-6731-7313", 0512, 235, client, CurrencyType.EUR, "test"),
+            //    new Card(323, "2351-6342-6342-9074", 5125, 9321, client, CurrencyType.PLN, "test1"),
+            //};
 
             GetExpensesORReceiptsByDataRangeButtonClickCommand = new DelegateCommand(GetExpensesORReceiptsByDataRange);
 

@@ -10,13 +10,13 @@ namespace BankApplication.Models.CardsModel
 
         public int CVC2Code { get; private set; }
         public string CardNumber { get; set; }
-        public int CardPINCode { get; private set; }
+        public int CardPINCode { get; set; }
         public decimal AmountOfMoney { get; set; }
         public CurrencyType CardCurrencyType { get; private set; }
         public DateTime CreateCardDate { get; private set; }
         public DateTime ExpiryCardDate { get; private set; }
-        public bool IsActive { get; private set; } // card can be blocked
-        
+        public bool IsActive { get; set; } // card can be 
+
 
         /// <summary>
         /// For get Card From DB

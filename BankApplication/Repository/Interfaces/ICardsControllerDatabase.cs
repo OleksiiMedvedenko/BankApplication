@@ -13,16 +13,16 @@ namespace BankApplication.Repository.Interfaces
 {
     public interface ICardsControllerDatabase
     {
-        DatabaseQueryResult<bool> CreateCard(Client client, Account account, Card card); // check on UNIQUE card number 
-        DatabaseQueryResult<bool> ChangeCardPINCode(Account account, Card card);
-        DatabaseQueryResult<bool> BlockingCard(Account account, Card card);
+        DatabaseQueryResult<bool> CreateCard(Card card); // check on UNIQUE card number 
+        DatabaseQueryResult<bool> ChangeCardPINCode(Card card, int PINCode);
+        DatabaseQueryResult<bool> BlockingCard(Card card);
 
         /// <summary>
         /// if CVC2Code set null => random value
         /// </summary>
         /// <param name="CVC2Code"></param>
         /// <returns></returns>
-        DatabaseQueryResult<bool> SetNewCVC2CodeCode(Account account, string CVC2Code = null);
+        DatabaseQueryResult<bool> SetNewCVC2CardCode(Card card, string CVC2Code = null);
 
         /// <summary>
         /// By CardNumber or phoneNuber client

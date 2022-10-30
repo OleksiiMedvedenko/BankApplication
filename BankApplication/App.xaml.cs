@@ -3,6 +3,8 @@ using BankApplication.ViewModels.Interface;
 using BankApplication.Views;
 using Prism.DryIoc;
 using Prism.Ioc;
+using SupportChatApplication.ViewModels;
+using SupportChatApplication.ViewModels.Interface;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -37,6 +39,8 @@ namespace BankApplication
             containerRegistry.Register<IAccountPersonalSettingViewModel, AccountPersonalSettingViewModel>();
             containerRegistry.Register<IAccountSecuritySettingViewModel, AccountSecuritySettingViewModel>();
             containerRegistry.Register<IAccountStatisticsSettingsViewModel, AccountStatisticsSettingsViewModel>();
+
+            containerRegistry.Register<IChatViewModel, ChatViewModel>();
         }
     }
 }

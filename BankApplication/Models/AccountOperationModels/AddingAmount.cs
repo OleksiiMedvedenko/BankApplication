@@ -36,10 +36,6 @@ namespace BankApplication.Models.AccountOperationModels
             OperationResultStatus = ResultStatus.Income;
         }
 
-        /// <summary>
-        /// For get from DB
-        /// </summary>
-
 
         public void AddingAmountExecution(string cardNumber)
         {

@@ -7,6 +7,7 @@ using Prism.Events;
 using Prism.Ioc;
 using Prism.Mvvm;
 using Prism.Regions;
+using SupportChatApplication.Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,6 +31,7 @@ namespace BankApplication.ViewModels
         public ICommand OpenTopMenuDepositViewButtonCommandClick { get; set; }
         public ICommand OpenTopMenuAccountViewButtonCommandClick { get; set; }
         public ICommand CloseApplicationCommand { get; set; }
+        public ICommand OpenSupportChatViewButtonCommandClick { get; set; }
 
         public MainStartViewModel(IRegionManager regionManager, IContainerExtension containerExtension, IEventAggregator eventAggregator)
         {
@@ -50,6 +52,7 @@ namespace BankApplication.ViewModels
             OpenTopMenuDepositViewButtonCommandClick = new DelegateCommand(OpenTopMenuDeposit);
             OpenTopMenuAccountViewButtonCommandClick = new DelegateCommand(OpenTopMenuAccount);
             CloseApplicationCommand = new DelegateCommand(CloseApplication);
+            OpenSupportChatViewButtonCommandClick = new DelegateCommand(OpenSupportChatView);
         }
 
         private void CloseApplication()
@@ -157,6 +160,19 @@ namespace BankApplication.ViewModels
         {
             IRegion region = _regionManager.Regions["MainRegion"];
             var view = _containerExtension.Resolve<AccountView>();
+
+            foreach (var v in region.Views)
+            {
+                region.Remove(v);
+            }
+
+            region.Add(view);
+        }
+
+        private void OpenSupportChatView()
+        {
+            IRegion region = _regionManager.Regions["MainRegion"];
+            var view = _containerExtension.Resolve<ChatView>();
 
             foreach (var v in region.Views)
             {

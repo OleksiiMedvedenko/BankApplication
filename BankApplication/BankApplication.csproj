@@ -117,7 +117,7 @@
     <ProjectReference Include="..\DatabaseTools\DatabaseTools.csproj" />
     <ProjectReference Include="..\LoginForm\LoginForm.csproj" />
     <ProjectReference Include="..\MessageBoxWidget\MessageBoxWidget.csproj" />
-    <ProjectReference Include="..\Tools\Tools\Tools.csproj" />
+    <ProjectReference Include="..\SupportChatApplication\SupportChatApplication.csproj" />
   </ItemGroup>
 
   <ItemGroup>

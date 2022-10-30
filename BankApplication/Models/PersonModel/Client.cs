@@ -17,6 +17,7 @@ namespace BankApplication.Models.PersonModel
         public byte?[] UserImage { get; private set; }
         public byte[] PassportImage { get; private set; }
         public bool IsActive { get; private set; }
+        public Gender Gender { get; private set; }
 
         public virtual ObservableCollection<Card> Cards { get; private set; }
 
@@ -33,7 +34,8 @@ namespace BankApplication.Models.PersonModel
         /// <param name="clientUniqueNumber"></param>
         /// <param name="cards"></param>
         public Client(int clientID, string firstName, string lastName, string email, string phoneNumber, 
-            string passportNumber, DateTime registrationDate, Guid clientUniqueNumber, ObservableCollection<Card> cards, byte[] passportImage, byte?[] userImage = null)
+            string passportNumber, DateTime registrationDate, Guid clientUniqueNumber, ObservableCollection<Card> cards, Gender gender,
+            byte[] passportImage, byte?[] userImage = null)
         {
             Cards = new ObservableCollection<Card>();
 
@@ -46,6 +48,7 @@ namespace BankApplication.Models.PersonModel
             RegistrationDate = registrationDate;
             ClientUniqueNumber = clientUniqueNumber;
             Cards = cards;
+            Gender = gender;
             PassportImage = passportImage;
             UserImage = userImage;
         }
@@ -59,7 +62,8 @@ namespace BankApplication.Models.PersonModel
         /// <param name="email"></param>
         /// <param name="phoneNumber"></param>
         /// <param name="passportNumber"></param>
-        public Client(int clientID, string firstName, string lastName, string email, string phoneNumber, string passportNumber, byte[] passportImage, byte?[] userImage = null)
+        public Client(int clientID, string firstName, string lastName, string email, string phoneNumber, string passportNumber, Gender gender,
+            byte[] passportImage, byte?[] userImage = null)
         {
             Cards = new ObservableCollection<Card>();
 
@@ -69,6 +73,7 @@ namespace BankApplication.Models.PersonModel
             Email = email;
             PhoneNumber = phoneNumber;
             PassportNumber = passportNumber;
+            Gender = gender;
             PassportImage = passportImage;
             UserImage = userImage;
 

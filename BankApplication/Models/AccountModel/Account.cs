@@ -6,13 +6,13 @@ namespace BankApplication.Models.AccountModel
     public class Account
     {
         public int AccountID { get; private set; }
-
         public virtual Client Client { get; private set; }
         public string Login { get; set; }
         public string Password { get; set; }
         public DateTime RegistrationDate { get; private set; }
         public Guid AccountCode { get; set; }
-        public bool IsActive { get; private set; }
+        public bool IsActive { get; set; }
+        public string SecretWord { get; set; }
 
         /// <summary>
         /// For get Account from DB
@@ -24,7 +24,7 @@ namespace BankApplication.Models.AccountModel
         /// <param name="client"></param>
         /// <param name="registrationDate"></param>
         /// <param name="accountCode"></param>
-        public Account(int accountID, string login, string password, Client client, DateTime registrationDate, Guid accountCode, bool isActive)
+        public Account(int accountID, string login, string password, Client client, DateTime registrationDate, Guid accountCode, bool isActive, string secretWord)
         {
             AccountID = accountID;
             Login = login;
@@ -33,6 +33,7 @@ namespace BankApplication.Models.AccountModel
             RegistrationDate = registrationDate;
             AccountCode = accountCode;
             IsActive = isActive;
+            SecretWord = secretWord;
         }
 
         /// <summary>
@@ -43,15 +44,16 @@ namespace BankApplication.Models.AccountModel
         /// <param name="password"></param>
         /// <param name="interestRate"></param>
         /// <param name="client"></param>
-        public Account(int accountID, string login, string password, Client client)
+        public Account(int accountID, string login, string password, Client client, string secretWord)
         {
             AccountID = accountID;
             Login = login;
             Password = password;
             Client = client;
+            SecretWord = secretWord;
             RegistrationDate = DateTime.Now;
             AccountCode = Guid.NewGuid();
-            IsActive = true;
+            IsActive = false; // admin check and confirm create acc 
         }
     }
 }
