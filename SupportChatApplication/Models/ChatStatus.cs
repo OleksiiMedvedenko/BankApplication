@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SupportChatApplication.Models
 {
-    public enum Status
+    public enum ChatStatus
     {
         Open,
         Closed

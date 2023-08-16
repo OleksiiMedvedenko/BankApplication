@@ -16,5 +16,10 @@ namespace SupportChatApplication.Repository
         {
             throw new NotImplementedException();
         }
+
+        public DatabaseQueryResult<ObservableCollection<MessageModel>> GetChat(string contactUserId)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

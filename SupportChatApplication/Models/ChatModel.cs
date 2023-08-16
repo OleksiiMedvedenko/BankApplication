@@ -13,6 +13,6 @@ namespace SupportChatApplication.Models
         public int AdminID { get; private set; }
         public int MessageID { get; private set; }
         public string ProblemTitle { get; private set; }
-        public Status StatusOfProblem { get; private set; }
+        public ChatStatus StatusOfProblem { get; private set; }
     }
 }
